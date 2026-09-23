@@ -144,16 +144,14 @@
   .btn-danger { background: #f44336; color: #fff; }
 
   .date-quick {
-    display: flex; gap: 6px; margin-top: 4px;
+    display: flex; gap: 6px; margin-top: 6px;
   }
   .date-quick button {
     flex: 1; padding: 8px; border: none; border-radius: 6px;
     background: #2a2a2a; color: #fff; font-size: 12px;
     cursor: pointer; font-weight: 600;
   }
-  .date-quick button.active {
-    background: #4fc3f7; color: #000;
-  }
+  .date-quick button:active { background: #4fc3f7; color: #000; }
 
   .profit-preview {
     background: #121212; border-radius: 8px;
@@ -178,17 +176,16 @@
     padding: 20px; font-size: 13px;
   }
 
-  /* ===== ГРАФИК ПО ДНЯМ ===== */
   .chart-days {
     display: flex; align-items: flex-end;
     height: 180px; gap: 2px;
-    padding: 10px 0; margin: 10px 0;
+    padding: 10px 0 20px 0; margin: 10px 0;
     border-bottom: 1px solid #333;
     overflow-x: auto;
   }
   .chart-day-col {
     flex: 1;
-    min-width: 6px;
+    min-width: 8px;
     display: flex; flex-direction: column;
     justify-content: flex-end; align-items: center;
     gap: 1px;
@@ -211,8 +208,8 @@
     position: absolute; bottom: -16px;
   }
   .chart-legend {
-    display: flex; gap: 12px; justify-content: center;
-    font-size: 11px; color: #888; margin-top: 20px;
+    display: flex; gap: 14px; justify-content: center;
+    font-size: 11px; color: #888; margin-top: 8px;
   }
   .chart-legend span::before {
     content: ''; display: inline-block;
@@ -221,8 +218,8 @@
   }
   .chart-legend .green::before { background: #4caf50; }
   .chart-legend .red::before { background: #f44336; }
+  .chart-legend .yellow::before { background: #ffc107; }
 
-  /* ===== ПИРОГ ===== */
   .pie-wrap {
     display: flex; align-items: center; gap: 16px;
     margin: 12px 0;
@@ -240,13 +237,20 @@
   .pie-legend {
     flex: 1;
     font-size: 12px;
+    min-width: 0;
   }
   .pie-legend-row {
     display: flex; justify-content: space-between;
     padding: 4px 0;
     border-bottom: 1px solid #2a2a2a;
+    gap: 8px;
   }
   .pie-legend-row:last-child { border-bottom: none; }
+  .pie-legend-row > span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   .pie-legend-row .color-dot {
     display: inline-block; width: 10px; height: 10px;
     border-radius: 50%; margin-right: 6px;
@@ -255,9 +259,9 @@
   .pie-legend-row .amount {
     font-family: ui-monospace, monospace;
     color: #fff; font-weight: 700;
+    white-space: nowrap;
   }
 
-  /* ===== КАЛЕНДАРЬ ===== */
   .cal-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -279,9 +283,10 @@
     cursor: pointer;
     font-size: 11px;
     border: 1px solid transparent;
+    min-height: 42px;
   }
   .cal-day.empty-day { visibility: hidden; }
-  .cal-day .day-num { color: #888; font-weight: 600; }
+  .cal-day .day-num { color: #888; font-weight: 600; font-size: 12px; }
   .cal-day .day-amount {
     font-size: 9px;
     font-family: ui-monospace, monospace;
@@ -298,7 +303,6 @@
   .cal-day.today { border-color: #4fc3f7; }
   .cal-day:active { transform: scale(0.95); }
 
-  /* ===== ДОЛГИ ===== */
   .debt-tabs {
     display: flex; gap: 6px; margin-bottom: 12px;
   }
@@ -334,9 +338,7 @@
     padding: 6px 12px; border-radius: 6px;
     font-size: 12px; font-weight: 700; cursor: pointer;
   }
-  .debt-item.closed {
-    opacity: 0.5;
-  }
+  .debt-item.closed { opacity: 0.5; }
   .debt-item.closed .btn-close-debt { display: none; }
 </style>
 </head>
@@ -382,7 +384,6 @@
       <div class="date-quick">
         <button type="button" data-date-target="shiftDate" data-date-val="today">Сегодня</button>
         <button type="button" data-date-target="shiftDate" data-date-val="yesterday">Вчера</button>
-        <button type="button" data-date-target="shiftDate" data-date-val="custom">📅</button>
       </div>
     </label>
     <label>ЗП за смену (₽)
@@ -407,15 +408,14 @@
       <div class="date-quick">
         <button type="button" data-date-target="tipDate" data-date-val="today">Сегодня</button>
         <button type="button" data-date-target="tipDate" data-date-val="yesterday">Вчера</button>
-        <button type="button" data-date-target="tipDate" data-date-val="custom">📅</button>
       </div>
     </label>
     <label>Сумма (₽)
       <input type="number" id="tipAmount" placeholder="0" inputmode="numeric">
     </label>
-   " <div class="modal-actions">
-      < idbutton class="btn-cancel" data-close>Отмена</button>
-      <button class="btn-save="saveTip">Сохранить</button>
+    <div class="modal-actions">
+      <button class="btn-cancel" data-close>Отмена</button>
+      <button class="btn-save" id="saveTip">Сохранить</button>
     </div>
   </div>
 </div>
@@ -429,7 +429,6 @@
       <div class="date-quick">
         <button type="button" data-date-target="expenseDate" data-date-val="today">Сегодня</button>
         <button type="button" data-date-target="expenseDate" data-date-val="yesterday">Вчера</button>
-        <button type="button" data-date-target="expenseDate" data-date-val="custom">📅</button>
       </div>
     </label>
     <label>Сумма (₽)
@@ -457,7 +456,6 @@
       <div class="date-quick">
         <button type="button" data-date-target="advanceDate" data-date-val="today">Сегодня</button>
         <button type="button" data-date-target="advanceDate" data-date-val="yesterday">Вчера</button>
-        <button type="button" data-date-target="advanceDate" data-date-val="custom">📅</button>
       </div>
     </label>
     <label>Сумма (₽)
@@ -504,8 +502,7 @@
     <div class="cal-grid" id="calendarGrid"></div>
     <div class="chart-legend" style="margin-top:12px;">
       <span class="green">заработал</span>
-      <span style="background:#ffc107;display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>
-      <span>частично</span>
+      <span class="yellow">частично</span>
       <span class="red">только расход</span>
     </div>
     <div id="calendarDayDetail" style="margin-top:12px;"></div>
@@ -521,8 +518,7 @@
     <h3>💳 Долги</h3>
     <div class="debt-tabs">
       <button id="tabIOwe" class="active">Я должен</button>
-      <button id="="tabOweMe">МнеДима">
- должны</button>
+      <button id="tabOweMe">Мне должны</button>
     </div>
     <div id="debtsList"></div>
     <button class="btn-save" id="addDebtBtn" style="width:100%;margin-top:12px;">➕ Добавить долг</button>
@@ -543,7 +539,8 @@
       </select>
     </label>
     <label>Имя
-      <input type="text" id="debtName" placeholder    </label>
+      <input type="text" id="debtName" placeholder="Дима">
+    </label>
     <label>Сумма (₽)
       <input type="number" id="debtAmount" placeholder="0" inputmode="numeric">
     </label>
@@ -573,7 +570,7 @@
 </div>
 
 <script>
- const STORAGE_KEY = 'koshel_v1';
+const STORAGE_KEY = 'koshel_v1';
 const CATEGORIES_KEY = 'koshel_categories_v1';
 const DEBTS_KEY = 'koshel_debts_v1';
 
@@ -598,6 +595,7 @@ let categories = loadCategories();
 let debts = loadDebts();
 let viewMonth = new Date();
 let currentDebtTab = 'i-owe';
+let calMonth = new Date();
 
 function loadState() {
   try {
@@ -606,9 +604,8 @@ function loadState() {
   } catch(e){}
   return { operations: [] };
 }
-function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
+function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
 function loadCategories() {
   try {
     const raw = localStorage.getItem(CATEGORIES_KEY);
@@ -616,9 +613,8 @@ function loadCategories() {
   } catch(e){}
   return [...DEFAULT_CATEGORIES];
 }
-function saveCategories() {
-  localStorage.setItem(CATEGORIES_KEY, JSON.stringify(categories));
-}
+function saveCategories() { localStorage.setItem(CATEGORIES_KEY, JSON.stringify(categories)); }
+
 function loadDebts() {
   try {
     const raw = localStorage.getItem(DEBTS_KEY);
@@ -626,9 +622,7 @@ function loadDebts() {
   } catch(e){}
   return [];
 }
-function saveDebts() {
-  localStorage.setItem(DEBTS_KEY, JSON.stringify(debts));
-}
+function saveDebts() { localStorage.setItem(DEBTS_KEY, JSON.stringify(debts)); }
 
 function monthKey(date) {
   const d = new Date(date);
@@ -653,14 +647,12 @@ function fmtMoney(n) {
 }
 function fmtDate(iso) {
   if (!iso) return '—';
-  const [y, m, d] = iso.split('-');
-  return `${d}.${m}`;
+  const parts = iso.split('-');
+  return `${parts[2]}.${parts[1]}`;
 }
 
 function isMonthClosed(key) {
-  return state.operations.some(op =>
-    op.type === 'salary' && op.monthKey === key
-  );
+  return state.operations.some(op => op.type === 'salary' && op.monthKey === key);
 }
 
 function getMonthSummary(key) {
@@ -678,27 +670,15 @@ function getMonthSummary(key) {
   return { salary, tips, advance, expenses, fact, toReceive, savings, closed };
 }
 
-// ===== БЫСТРЫЕ КНОПКИ ДАТЫ =====
-document.querySelectorAll('.date-quick button').forEach(btn => {
-  btn.onclick = () => {
-    const target = document.getElementById(btn.dataset.dateTarget);
-    const val = btn.dataset.dateVal;
-    if (val === 'today') target.value = todayISO();
-    else if (val === 'yesterday') target.value = yesterdayISO();
-    // Убираем active со всех
-    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  };
-});
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(el) { el.closest('.modal-bg').classList.remove('open'); }
 
-// ===== ОТОБРАЖЕНИЕ ГЛАВНОГО ЭКРАНА =====
+// ===== ОТОБРАЖЕНИЕ =====
 function render() {
   const key = monthKey(viewMonth);
   const s = getMonthSummary(key);
 
   document.getElementById('monthTitle').textContent = monthLabel(viewMonth);
-
-  const summaryEl = document.getElementById('summary');
 
   let html = `
     <h2>${s.closed ? '✅ Закрыт' : '📊 Сводка'}</h2>
@@ -748,9 +728,8 @@ function render() {
     </div>
   `;
 
-  summaryEl.innerHTML = html;
+  document.getElementById('summary').innerHTML = html;
 
-  // История
   const ops = state.operations
     .filter(op => op.monthKey === key)
     .sort((a, b) => b.timestamp - a.timestamp);
@@ -760,28 +739,12 @@ function render() {
     histEl.innerHTML = '<div class="empty">Нет операций за этот месяц</div>';
   } else {
     histEl.innerHTML = ops.slice(0, 30).map(op => {
-      let icon, label, amount, cls;
-      if (op.type === 'shift') {
-        icon = '📊'; label = 'Смена';
-        amount = fmtMoney(op.salary + (op.tips || 0));
-        cls = 'income';
-      } else if (op.type === 'tip') {
-        icon = '💵'; label = 'Чаевые';
-        amount = fmtMoney(op.tips);
-        cls = 'income';
-      } else if (op.type === 'expense') {
-        icon = '➖'; label = op.category || 'Расход';
-        amount = '−' + fmtMoney(op.amount);
-        cls = 'expense';
-      } else if (op.type === 'advance') {
-        icon = '🏦'; label = 'Аванс';
-        amount = fmtMoney(op.amount);
-        cls = 'neutral';
-      } else if (op.type === 'salary') {
-        icon = '💼'; label = 'ЗП получена';
-        amount = fmtMoney(op.fact);
-        cls = 'neutral';
-      }
+      let icon = '•', label = '', amount = '', cls = 'neutral';
+      if (op.type === 'shift') { icon = '📊'; label = 'Смена'; amount = fmtMoney(op.salary + (op.tips || 0)); cls = 'income'; }
+      else if (op.type === 'tip') { icon = '💵'; label = 'Чаевые'; amount = fmtMoney(op.tips); cls = 'income'; }
+      else if (op.type === 'expense') { icon = '➖'; label = op.category || 'Расход'; amount = '−' + fmtMoney(op.amount); cls = 'expense'; }
+      else if (op.type === 'advance') { icon = '🏦'; label = 'Аванс'; amount = fmtMoney(op.amount); cls = 'neutral'; }
+      else if (op.type === 'salary') { icon = '💼'; label = 'ЗП получена'; amount = fmtMoney(op.fact); cls = 'neutral'; }
       return `
         <div class="history-item">
           <div>
@@ -795,13 +758,11 @@ function render() {
     }).join('');
   }
 
-  // Кнопка ЗП
   const salaryBtn = document.getElementById('salaryBtn');
   const prev = new Date(viewMonth);
   prev.setMonth(prev.getMonth() - 1);
   const prevKey = monthKey(prev);
-  const hasPrevToClose = !isMonthClosed(prevKey) &&
-    state.operations.some(o => o.monthKey === prevKey);
+  const hasPrevToClose = !isMonthClosed(prevKey) && state.operations.some(o => o.monthKey === prevKey);
 
   if (isMonthClosed(key)) {
     salaryBtn.textContent = '✅ Месяц закрыт';
@@ -818,15 +779,22 @@ function render() {
   }
 }
 
-// ===== МОДАЛКИ =====
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModal(el) { el.closest('.modal-bg').classList.remove('open'); }
-
+// ===== ЗАКРЫТИЕ МОДАЛОК =====
 document.querySelectorAll('[data-close]').forEach(btn => {
   btn.onclick = (e) => closeModal(e.target);
 });
 document.querySelectorAll('.modal-bg').forEach(bg => {
   bg.onclick = (e) => { if (e.target === bg) bg.classList.remove('open'); };
+});
+
+// ===== БЫСТРЫЕ КНОПКИ ДАТЫ =====
+document.querySelectorAll('.date-quick button').forEach(btn => {
+  btn.onclick = (e) => {
+    e.preventDefault();
+    const target = document.getElementById(btn.dataset.dateTarget);
+    if (btn.dataset.dateVal === 'today') target.value = todayISO();
+    else if (btn.dataset.dateVal === 'yesterday') target.value = yesterdayISO();
+  };
 });
 
 // ===== СМЕНА =====
@@ -973,7 +941,7 @@ document.getElementById('saveSalary').onclick = () => {
   render();
 };
 
-// ===== ОТЧЁТ С ГРАФИКАМИ =====
+// ===== ОТЧЁТ =====
 document.getElementById('reportBtn').onclick = () => {
   const key = monthKey(viewMonth);
   const ops = state.operations.filter(o => o.monthKey === key);
@@ -981,11 +949,9 @@ document.getElementById('reportBtn').onclick = () => {
   const shifts = ops.filter(o => o.type === 'shift');
   const avgSalary = shifts.length ? Math.round(shifts.reduce((sum,o) => sum + o.salary, 0) / shifts.length) : 0;
 
-  // Группировка по дням
-  const [year, monthNum] = key.split('-').map(Number);
-  const daysInMonth = new Date(year, monthNum, 0).getDate();
-  const dailyIn = {};
-  const dailyOut = {};
+  const parts = key.split('-').map(Number);
+  const daysInMonth = new Date(parts[0], parts[1], 0).getDate();
+  const dailyIn = {}, dailyOut = {};
   for (let d = 1; d <= daysInMonth; d++) { dailyIn[d] = 0; dailyOut[d] = 0; }
   ops.forEach(o => {
     const day = parseInt(o.date.split('-')[2]);
@@ -998,7 +964,6 @@ document.getElementById('reportBtn').onclick = () => {
   const maxOut = Math.max(...Object.values(dailyOut), 1);
   const maxVal = Math.max(maxIn, maxOut);
 
-  // Столбцы
   let chartHtml = '<div class="chart-days">';
   for (let d = 1; d <= daysInMonth; d++) {
     const hIn = dailyIn[d] ? Math.max(2, (dailyIn[d] / maxVal) * 150) : 0;
@@ -1019,18 +984,17 @@ document.getElementById('reportBtn').onclick = () => {
     </div>
   `;
 
-  // Пирог по категориям
   const byCategory = {};
   ops.filter(o => o.type === 'expense').forEach(o => {
     byCategory[o.category] = (byCategory[o.category] || 0) + o.amount;
   });
   const catEntries = Object.entries(byCategory).sort((a,b) => b[1] - a[1]);
-  const totalExp = catEntries.reduce((s, [,v]) => s + v, 0);
+  const totalExp = catEntries.reduce((sum, [,v]) => sum + v, 0);
 
   let pieHtml = '';
   if (catEntries.length > 0) {
     let acc = 0;
-    const stops = catEntries.map(([cat, val], i) => {
+    const stops = catEntries.map(([, val], i) => {
       const pct = (val / totalExp) * 100;
       const start = acc;
       acc += pct;
@@ -1050,10 +1014,7 @@ document.getElementById('reportBtn').onclick = () => {
                   <span class="color-dot" style="background:${PIE_COLORS[i % PIE_COLORS.length]};"></span>
                   ${cat}
                 </span>
-                <span>
-                  <span class="amount">${fmtMoney(val)}</span>
-                  <span style="color:#888;font-size:11px;"> ${pct}%</span>
-                </span>
+                <span class="amount">${fmtMoney(val)} <span style="color:#888;font-size:11px;">${pct}%</span></span>
               </div>
             `;
           }).join('')}
@@ -1085,25 +1046,22 @@ document.getElementById('reportBtn').onclick = () => {
 };
 
 // ===== КАЛЕНДАРЬ =====
-let calMonth = new Date();
-let calSelectedDay = null;
-
 document.getElementById('calendarBtn').onclick = () => {
   calMonth = new Date(viewMonth);
-  calSelectedDay = null;
   renderCalendar();
+  document.getElementById('calendarDayDetail').innerHTML = '';
   openModal('calendarModal');
 };
 
 function renderCalendar() {
-  const [year, monthNum] = [calMonth.getFullYear(), calMonth.getMonth()];
+  const year = calMonth.getFullYear();
+  const monthNum = calMonth.getMonth();
   document.getElementById('calendarTitle').textContent = `📅 ${MONTHS_RU[monthNum]} ${year}`;
 
   const key = monthKey(calMonth);
   const ops = state.operations.filter(o => o.monthKey === key);
 
-  const dailyIn = {};
-  const dailyOut = {};
+  const dailyIn = {}, dailyOut = {};
   ops.forEach(o => {
     const day = parseInt(o.date.split('-')[2]);
     if (!dailyIn[day]) dailyIn[day] = 0;
@@ -1115,7 +1073,7 @@ function renderCalendar() {
 
   const firstDay = new Date(year, monthNum, 1).getDay();
   const daysInMonth = new Date(year, monthNum + 1, 0).getDate();
-  const offset = (firstDay === 0 ? 6 : firstDay - 1); // Пн первый
+  const offset = (firstDay === 0 ? 6 : firstDay - 1);
 
   const today = new Date();
   const isThisMonth = today.getFullYear() === year && today.getMonth() === monthNum;
@@ -1146,7 +1104,6 @@ function renderCalendar() {
   }
 
   document.getElementById('calendarGrid').innerHTML = html;
-  document.getElementById('calendarDayDetail').innerHTML = '';
 
   document.querySelectorAll('#calendarGrid .cal-day:not(.empty-day)').forEach(el => {
     el.onclick = () => showDayDetail(parseInt(el.dataset.day));
@@ -1154,7 +1111,6 @@ function renderCalendar() {
 }
 
 function showDayDetail(day) {
-  const key = monthKey(calMonth);
   const dateStr = `${calMonth.getFullYear()}-${String(calMonth.getMonth()+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
   const ops = state.operations.filter(o => o.date === dateStr);
 
@@ -1166,7 +1122,7 @@ function showDayDetail(day) {
   }
 
   const html = ops.map(op => {
-    let icon, label, amount, cls;
+    let icon = '•', label = '', amount = '', cls = 'neutral';
     if (op.type === 'shift') { icon = '📊'; label = 'Смена'; amount = fmtMoney(op.salary + (op.tips||0)); cls = 'income'; }
     else if (op.type === 'tip') { icon = '💵'; label = 'Чаевые'; amount = fmtMoney(op.tips); cls = 'income'; }
     else if (op.type === 'expense') { icon = '➖'; label = op.category; amount = '−' + fmtMoney(op.amount); cls = 'expense'; }
