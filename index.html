@@ -18,7 +18,7 @@
 
   .month-nav {
     display: flex; justify-content: center; align-items: center;
-    gap: 12px; margin-bottom: 12px;
+    gap: 12px; margin-bottom: 10px;
   }
   .month-nav button {
     background: #2a2a2a; color: #fff; border: none;
@@ -28,6 +28,17 @@
   .month-nav .month-title {
     font-size: 17px; font-weight: 700; min-width: 150px; text-align: center;
   }
+
+  .top-bar {
+    display: flex; justify-content: center; gap: 5px;
+    margin-bottom: 12px; flex-wrap: wrap;
+  }
+  .top-bar button {
+    background: #2a2a2a; color: #fff; border: none;
+    padding: 7px 10px; border-radius: 8px; font-size: 11px;
+    font-weight: 600; cursor: pointer;
+  }
+  .top-bar button:active { transform: scale(0.97); }
 
   .summary {
     background: #1e1e1e; border-radius: 12px;
@@ -47,9 +58,7 @@
   .summary-row.negative .amount { color: #f44336; }
   .summary-row.accent .amount { color: #4fc3f7; }
 
-  .summary-divider {
-    height: 1px; background: #333; margin: 8px 0;
-  }
+  .summary-divider { height: 1px; background: #333; margin: 8px 0; }
 
   .big-amount {
     font-size: 24px; font-weight: 800;
@@ -58,7 +67,6 @@
   }
   .big-amount.positive { color: #4caf50; }
   .big-amount.negative { color: #f44336; }
-  .big-amount.accent { color: #4fc3f7; }
 
   .actions {
     display: grid; grid-template-columns: 1fr 1fr;
@@ -101,16 +109,6 @@
   .history-item .amount.expense { color: #f44336; }
   .history-item .amount.neutral { color: #4fc3f7; }
 
-  .top-bar {
-    display: flex; justify-content: center; gap: 6px;
-    margin-bottom: 12px; flex-wrap: wrap;
-  }
-  .top-bar button {
-    background: #2a2a2a; color: #fff; border: none;
-    padding: 7px 12px; border-radius: 8px; font-size: 12px;
-    font-weight: 600; cursor: pointer;
-  }
-
   .modal-bg {
     position: fixed; inset: 0; background: rgba(0,0,0,0.8);
     display: none; align-items: center; justify-content: center;
@@ -119,7 +117,7 @@
   .modal-bg.open { display: flex; }
   .modal {
     background: #1e1e1e; border-radius: 14px; padding: 18px;
-    width: 100%; max-width: 420px; max-height: 90vh; overflow-y: auto;
+    width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto;
   }
   .modal h3 { margin: 0 0 14px; font-size: 17px; }
   .modal label {
@@ -145,6 +143,18 @@
   .btn-cancel { background: #444; color: #fff; }
   .btn-danger { background: #f44336; color: #fff; }
 
+  .date-quick {
+    display: flex; gap: 6px; margin-top: 4px;
+  }
+  .date-quick button {
+    flex: 1; padding: 8px; border: none; border-radius: 6px;
+    background: #2a2a2a; color: #fff; font-size: 12px;
+    cursor: pointer; font-weight: 600;
+  }
+  .date-quick button.active {
+    background: #4fc3f7; color: #000;
+  }
+
   .profit-preview {
     background: #121212; border-radius: 8px;
     padding: 10px; margin: 10px 0;
@@ -167,11 +177,180 @@
     text-align: center; color: #666;
     padding: 20px; font-size: 13px;
   }
+
+  /* ===== ГРАФИК ПО ДНЯМ ===== */
+  .chart-days {
+    display: flex; align-items: flex-end;
+    height: 180px; gap: 2px;
+    padding: 10px 0; margin: 10px 0;
+    border-bottom: 1px solid #333;
+    overflow-x: auto;
+  }
+  .chart-day-col {
+    flex: 1;
+    min-width: 6px;
+    display: flex; flex-direction: column;
+    justify-content: flex-end; align-items: center;
+    gap: 1px;
+    position: relative;
+  }
+  .chart-day-col .bar-in {
+    width: 100%;
+    background: #4caf50;
+    border-radius: 2px 2px 0 0;
+    min-height: 2px;
+  }
+  .chart-day-col .bar-out {
+    width: 100%;
+    background: #f44336;
+    border-radius: 0 0 2px 2px;
+    min-height: 2px;
+  }
+  .chart-day-col .day-num {
+    font-size: 9px; color: #666;
+    position: absolute; bottom: -16px;
+  }
+  .chart-legend {
+    display: flex; gap: 12px; justify-content: center;
+    font-size: 11px; color: #888; margin-top: 20px;
+  }
+  .chart-legend span::before {
+    content: ''; display: inline-block;
+    width: 10px; height: 10px; border-radius: 2px;
+    margin-right: 4px; vertical-align: middle;
+  }
+  .chart-legend .green::before { background: #4caf50; }
+  .chart-legend .red::before { background: #f44336; }
+
+  /* ===== ПИРОГ ===== */
+  .pie-wrap {
+    display: flex; align-items: center; gap: 16px;
+    margin: 12px 0;
+  }
+  .pie {
+    width: 130px; height: 130px; border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .pie::after {
+    content: ''; position: absolute;
+    inset: 28px; background: #1e1e1e;
+    border-radius: 50%;
+  }
+  .pie-legend {
+    flex: 1;
+    font-size: 12px;
+  }
+  .pie-legend-row {
+    display: flex; justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px solid #2a2a2a;
+  }
+  .pie-legend-row:last-child { border-bottom: none; }
+  .pie-legend-row .color-dot {
+    display: inline-block; width: 10px; height: 10px;
+    border-radius: 50%; margin-right: 6px;
+    vertical-align: middle;
+  }
+  .pie-legend-row .amount {
+    font-family: ui-monospace, monospace;
+    color: #fff; font-weight: 700;
+  }
+
+  /* ===== КАЛЕНДАРЬ ===== */
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin: 10px 0;
+  }
+  .cal-head {
+    text-align: center; font-size: 11px;
+    color: #888; padding: 4px 0;
+    font-weight: 600;
+  }
+  .cal-day {
+    aspect-ratio: 1;
+    background: #121212;
+    border-radius: 6px;
+    padding: 4px;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 11px;
+    border: 1px solid transparent;
+  }
+  .cal-day.empty-day { visibility: hidden; }
+  .cal-day .day-num { color: #888; font-weight: 600; }
+  .cal-day .day-amount {
+    font-size: 9px;
+    font-family: ui-monospace, monospace;
+    color: #fff;
+    text-align: right;
+    font-weight: 700;
+  }
+  .cal-day.green { background: #1b3a1e; }
+  .cal-day.green .day-amount { color: #66bb6a; }
+  .cal-day.yellow { background: #3a341b; }
+  .cal-day.yellow .day-amount { color: #ffc107; }
+  .cal-day.red { background: #3a1b1b; }
+  .cal-day.red .day-amount { color: #ef5350; }
+  .cal-day.today { border-color: #4fc3f7; }
+  .cal-day:active { transform: scale(0.95); }
+
+  /* ===== ДОЛГИ ===== */
+  .debt-tabs {
+    display: flex; gap: 6px; margin-bottom: 12px;
+  }
+  .debt-tabs button {
+    flex: 1; padding: 10px; border: none; border-radius: 8px;
+    background: #2a2a2a; color: #fff; font-size: 13px;
+    font-weight: 600; cursor: pointer;
+  }
+  .debt-tabs button.active {
+    background: #4fc3f7; color: #000;
+  }
+  .debt-item {
+    background: #121212; border-radius: 10px;
+    padding: 12px; margin-bottom: 8px;
+  }
+  .debt-item .top {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 6px;
+  }
+  .debt-item .name { font-weight: 700; font-size: 14px; }
+  .debt-item .sum {
+    font-family: ui-monospace, monospace;
+    font-weight: 700; font-size: 15px;
+  }
+  .debt-item .sum.i-owe { color: #f44336; }
+  .debt-item .sum.owe-me { color: #4caf50; }
+  .debt-item .bottom {
+    display: flex; justify-content: space-between;
+    align-items: center; font-size: 11px; color: #888;
+  }
+  .debt-item .btn-close-debt {
+    background: #4caf50; color: #fff; border: none;
+    padding: 6px 12px; border-radius: 6px;
+    font-size: 12px; font-weight: 700; cursor: pointer;
+  }
+  .debt-item.closed {
+    opacity: 0.5;
+  }
+  .debt-item.closed .btn-close-debt { display: none; }
 </style>
 </head>
 <body>
 
 <h1>💰 Кошель</h1>
+
+<div class="top-bar">
+  <button id="reportBtn">📊 Отчёт</button>
+  <button id="calendarBtn">📅 Календарь</button>
+  <button id="debtsBtn">💳 Долги</button>
+  <button id="settingsBtn">⚙️ Категории</button>
+  <button id="exportBtn">💾 CSV</button>
+</div>
 
 <div class="month-nav">
   <button id="prevMonth">◀</button>
@@ -194,17 +373,17 @@
   <div id="historyList"></div>
 </div>
 
-<div class="top-bar">
-  <button id="reportBtn">📊 Отчёт</button>
-  <button id="exportBtn">💾 CSV</button>
-  <button id="settingsBtn">⚙️ Категории</button>
-</div>
-
+<!-- Модалка: Смена -->
 <div class="modal-bg" id="shiftModal">
   <div class="modal">
     <h3>📊 Смена</h3>
     <label>Дата
       <input type="date" id="shiftDate">
+      <div class="date-quick">
+        <button type="button" data-date-target="shiftDate" data-date-val="today">Сегодня</button>
+        <button type="button" data-date-target="shiftDate" data-date-val="yesterday">Вчера</button>
+        <button type="button" data-date-target="shiftDate" data-date-val="custom">📅</button>
+      </div>
     </label>
     <label>ЗП за смену (₽)
       <input type="number" id="shiftSalary" placeholder="0" inputmode="numeric">
@@ -219,27 +398,39 @@
   </div>
 </div>
 
+<!-- Модалка: Чаевые -->
 <div class="modal-bg" id="tipModal">
   <div class="modal">
     <h3>💵 Чаевые</h3>
     <label>Дата
       <input type="date" id="tipDate">
+      <div class="date-quick">
+        <button type="button" data-date-target="tipDate" data-date-val="today">Сегодня</button>
+        <button type="button" data-date-target="tipDate" data-date-val="yesterday">Вчера</button>
+        <button type="button" data-date-target="tipDate" data-date-val="custom">📅</button>
+      </div>
     </label>
     <label>Сумма (₽)
       <input type="number" id="tipAmount" placeholder="0" inputmode="numeric">
     </label>
-    <div class="modal-actions">
-      <button class="btn-cancel" data-close>Отмена</button>
-      <button class="btn-save" id="saveTip">Сохранить</button>
+   " <div class="modal-actions">
+      < idbutton class="btn-cancel" data-close>Отмена</button>
+      <button class="btn-save="saveTip">Сохранить</button>
     </div>
   </div>
 </div>
 
+<!-- Модалка: Расход -->
 <div class="modal-bg" id="expenseModal">
   <div class="modal">
     <h3>➖ Расход</h3>
     <label>Дата
       <input type="date" id="expenseDate">
+      <div class="date-quick">
+        <button type="button" data-date-target="expenseDate" data-date-val="today">Сегодня</button>
+        <button type="button" data-date-target="expenseDate" data-date-val="yesterday">Вчера</button>
+        <button type="button" data-date-target="expenseDate" data-date-val="custom">📅</button>
+      </div>
     </label>
     <label>Сумма (₽)
       <input type="number" id="expenseAmount" placeholder="0" inputmode="numeric">
@@ -257,11 +448,17 @@
   </div>
 </div>
 
+<!-- Модалка: Аванс -->
 <div class="modal-bg" id="advanceModal">
   <div class="modal">
     <h3>🏦 Аванс</h3>
     <label>Дата
       <input type="date" id="advanceDate">
+      <div class="date-quick">
+        <button type="button" data-date-target="advanceDate" data-date-val="today">Сегодня</button>
+        <button type="button" data-date-target="advanceDate" data-date-val="yesterday">Вчера</button>
+        <button type="button" data-date-target="advanceDate" data-date-val="custom">📅</button>
+      </div>
     </label>
     <label>Сумма (₽)
       <input type="number" id="advanceAmount" placeholder="0" inputmode="numeric">
@@ -273,6 +470,7 @@
   </div>
 </div>
 
+<!-- Модалка: Получил ЗП -->
 <div class="modal-bg" id="salaryModal">
   <div class="modal">
     <h3 id="salaryTitle">💼 Получил ЗП</h3>
@@ -288,6 +486,78 @@
   </div>
 </div>
 
+<!-- Модалка: Отчёт -->
+<div class="modal-bg" id="reportModal">
+  <div class="modal">
+    <h3>📊 Отчёт за месяц</h3>
+    <div id="reportContent"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" data-close>Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<!-- Модалка: Календарь -->
+<div class="modal-bg" id="calendarModal">
+  <div class="modal">
+    <h3 id="calendarTitle">📅 Календарь</h3>
+    <div class="cal-grid" id="calendarGrid"></div>
+    <div class="chart-legend" style="margin-top:12px;">
+      <span class="green">заработал</span>
+      <span style="background:#ffc107;display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle;"></span>
+      <span>частично</span>
+      <span class="red">только расход</span>
+    </div>
+    <div id="calendarDayDetail" style="margin-top:12px;"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" data-close>Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<!-- Модалка: Долги -->
+<div class="modal-bg" id="debtsModal">
+  <div class="modal">
+    <h3>💳 Долги</h3>
+    <div class="debt-tabs">
+      <button id="tabIOwe" class="active">Я должен</button>
+      <button id="="tabOweMe">МнеДима">
+ должны</button>
+    </div>
+    <div id="debtsList"></div>
+    <button class="btn-save" id="addDebtBtn" style="width:100%;margin-top:12px;">➕ Добавить долг</button>
+    <div class="modal-actions">
+      <button class="btn-cancel" data-close>Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<!-- Модалка: Добавить долг -->
+<div class="modal-bg" id="debtAddModal">
+  <div class="modal">
+    <h3>💳 Новый долг</h3>
+    <label>Тип
+      <select id="debtType">
+        <option value="i-owe">Я должен</option>
+        <option value="owe-me">Мне должны</option>
+      </select>
+    </label>
+    <label>Имя
+      <input type="text" id="debtName" placeholder    </label>
+    <label>Сумма (₽)
+      <input type="number" id="debtAmount" placeholder="0" inputmode="numeric">
+    </label>
+    <label>Заметка (необязательно)
+      <input type="text" id="debtNote" placeholder="">
+    </label>
+    <div class="modal-actions">
+      <button class="btn-cancel" data-close>Отмена</button>
+      <button class="btn-save" id="saveDebt">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<!-- Модалка: Категории -->
 <div class="modal-bg" id="settingsModal">
   <div class="modal">
     <h3>⚙️ Категории расходов</h3>
@@ -302,31 +572,32 @@
   </div>
 </div>
 
-<div class="modal-bg" id="reportModal">
-  <div class="modal">
-    <h3>📊 Отчёт за месяц</h3>
-    <div id="reportContent"></div>
-    <div class="modal-actions">
-      <button class="btn-cancel" data-close>Закрыть</button>
-    </div>
-  </div>
-</div>
-
 <script>
-const STORAGE_KEY = 'koshel_v1';
+ const STORAGE_KEY = 'koshel_v1';
 const CATEGORIES_KEY = 'koshel_categories_v1';
+const DEBTS_KEY = 'koshel_debts_v1';
 
 const MONTHS_RU = ['Январь','Февраль','Март','Апрель','Май','Июнь',
                    'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const MONTHS_SHORT = ['янв','фев','мар','апр','мая','июн',
+                      'июл','авг','сен','окт','ноя','дек'];
 
 const DEFAULT_CATEGORIES = [
   '🍔 Еда', '🚗 Транспорт', '🏠 Жильё', '📱 Связь',
   '💊 Здоровье', '👕 Одежда', '🎉 Развлечения', '📦 Прочее'
 ];
 
+const PIE_COLORS = [
+  '#4caf50', '#2196f3', '#ff9800', '#9c27b0',
+  '#f44336', '#00bcd4', '#ffc107', '#795548',
+  '#e91e63', '#3f51b5'
+];
+
 let state = loadState();
 let categories = loadCategories();
+let debts = loadDebts();
 let viewMonth = new Date();
+let currentDebtTab = 'i-owe';
 
 function loadState() {
   try {
@@ -348,6 +619,16 @@ function loadCategories() {
 function saveCategories() {
   localStorage.setItem(CATEGORIES_KEY, JSON.stringify(categories));
 }
+function loadDebts() {
+  try {
+    const raw = localStorage.getItem(DEBTS_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e){}
+  return [];
+}
+function saveDebts() {
+  localStorage.setItem(DEBTS_KEY, JSON.stringify(debts));
+}
 
 function monthKey(date) {
   const d = new Date(date);
@@ -361,11 +642,17 @@ function todayISO() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
+function yesterdayISO() {
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
 function fmtMoney(n) {
   const abs = Math.abs(n).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   return (n < 0 ? '−' : '') + abs + ' ₽';
 }
 function fmtDate(iso) {
+  if (!iso) return '—';
   const [y, m, d] = iso.split('-');
   return `${d}.${m}`;
 }
@@ -388,10 +675,23 @@ function getMonthSummary(key) {
   const toReceive = salary - advance;
   const savings = tips - expenses;
   const closed = isMonthClosed(key);
-
   return { salary, tips, advance, expenses, fact, toReceive, savings, closed };
 }
 
+// ===== БЫСТРЫЕ КНОПКИ ДАТЫ =====
+document.querySelectorAll('.date-quick button').forEach(btn => {
+  btn.onclick = () => {
+    const target = document.getElementById(btn.dataset.dateTarget);
+    const val = btn.dataset.dateVal;
+    if (val === 'today') target.value = todayISO();
+    else if (val === 'yesterday') target.value = yesterdayISO();
+    // Убираем active со всех
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  };
+});
+
+// ===== ОТОБРАЖЕНИЕ ГЛАВНОГО ЭКРАНА =====
 function render() {
   const key = monthKey(viewMonth);
   const s = getMonthSummary(key);
@@ -450,6 +750,7 @@ function render() {
 
   summaryEl.innerHTML = html;
 
+  // История
   const ops = state.operations
     .filter(op => op.monthKey === key)
     .sort((a, b) => b.timestamp - a.timestamp);
@@ -494,6 +795,7 @@ function render() {
     }).join('');
   }
 
+  // Кнопка ЗП
   const salaryBtn = document.getElementById('salaryBtn');
   const prev = new Date(viewMonth);
   prev.setMonth(prev.getMonth() - 1);
@@ -506,7 +808,7 @@ function render() {
     salaryBtn.disabled = true;
     salaryBtn.style.opacity = '0.5';
   } else if (hasPrevToClose) {
-    salaryBtn.textContent = `💼 Получил ЗП за ${monthLabel(prev).split(' ')[0].toLowerCase()}`;
+    salaryBtn.textContent = `💼 Получил ЗП за ${MONTHS_SHORT[prev.getMonth()]}`;
     salaryBtn.disabled = false;
     salaryBtn.style.opacity = '1';
   } else {
@@ -516,66 +818,62 @@ function render() {
   }
 }
 
-function openModal(id) {
-  document.getElementById(id).classList.add('open');
-}
-function closeModal(el) {
-  el.closest('.modal-bg').classList.remove('open');
-}
+// ===== МОДАЛКИ =====
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(el) { el.closest('.modal-bg').classList.remove('open'); }
 
+document.querySelectorAll('[data-close]').forEach(btn => {
+  btn.onclick = (e) => closeModal(e.target);
+});
+document.querySelectorAll('.modal-bg').forEach(bg => {
+  bg.onclick = (e) => { if (e.target === bg) bg.classList.remove('open'); };
+});
+
+// ===== СМЕНА =====
 document.getElementById('shiftBtn').onclick = () => {
   document.getElementById('shiftDate').value = todayISO();
   document.getElementById('shiftSalary').value = '';
   document.getElementById('shiftTips').value = '0';
   openModal('shiftModal');
 };
-
 document.getElementById('saveShift').onclick = () => {
   const date = document.getElementById('shiftDate').value;
   const salary = parseInt(document.getElementById('shiftSalary').value) || 0;
   const tips = parseInt(document.getElementById('shiftTips').value) || 0;
   if (!date) return alert('Укажи дату');
   if (salary === 0 && tips === 0) return alert('Введи сумму');
-
   state.operations.push({
     id: Date.now() + Math.random().toString(36).slice(2, 6),
-    type: 'shift',
-    date,
-    monthKey: monthKey(date),
-    salary,
-    tips,
-    timestamp: Date.now(),
+    type: 'shift', date, monthKey: monthKey(date),
+    salary, tips, timestamp: Date.now(),
   });
   saveState();
   closeModal(document.getElementById('saveShift'));
   render();
 };
 
+// ===== ЧАЕВЫЕ =====
 document.getElementById('tipBtn').onclick = () => {
   document.getElementById('tipDate').value = todayISO();
   document.getElementById('tipAmount').value = '';
   openModal('tipModal');
 };
-
 document.getElementById('saveTip').onclick = () => {
   const date = document.getElementById('tipDate').value;
   const tips = parseInt(document.getElementById('tipAmount').value) || 0;
   if (!date) return alert('Укажи дату');
   if (tips === 0) return alert('Введи сумму');
-
   state.operations.push({
     id: Date.now() + Math.random().toString(36).slice(2, 6),
-    type: 'tip',
-    date,
-    monthKey: monthKey(date),
-    tips,
-    timestamp: Date.now(),
+    type: 'tip', date, monthKey: monthKey(date),
+    tips, timestamp: Date.now(),
   });
   saveState();
   closeModal(document.getElementById('saveTip'));
   render();
 };
 
+// ===== РАСХОД =====
 document.getElementById('expenseBtn').onclick = () => {
   document.getElementById('expenseDate').value = todayISO();
   document.getElementById('expenseAmount').value = '';
@@ -584,7 +882,6 @@ document.getElementById('expenseBtn').onclick = () => {
   select.innerHTML = categories.map(c => `<option value="${c}">${c}</option>`).join('');
   openModal('expenseModal');
 };
-
 document.getElementById('saveExpense').onclick = () => {
   const date = document.getElementById('expenseDate').value;
   const amount = parseInt(document.getElementById('expenseAmount').value) || 0;
@@ -592,63 +889,50 @@ document.getElementById('saveExpense').onclick = () => {
   const note = document.getElementById('expenseNote').value.trim();
   if (!date) return alert('Укажи дату');
   if (amount === 0) return alert('Введи сумму');
-
   state.operations.push({
     id: Date.now() + Math.random().toString(36).slice(2, 6),
-    type: 'expense',
-    date,
-    monthKey: monthKey(date),
-    amount,
-    category,
-    note,
-    timestamp: Date.now(),
+    type: 'expense', date, monthKey: monthKey(date),
+    amount, category, note, timestamp: Date.now(),
   });
   saveState();
   closeModal(document.getElementById('saveExpense'));
   render();
 };
 
+// ===== АВАНС =====
 document.getElementById('advanceBtn').onclick = () => {
   document.getElementById('advanceDate').value = todayISO();
   document.getElementById('advanceAmount').value = '';
   openModal('advanceModal');
 };
-
 document.getElementById('saveAdvance').onclick = () => {
   const date = document.getElementById('advanceDate').value;
   const amount = parseInt(document.getElementById('advanceAmount').value) || 0;
   if (!date) return alert('Укажи дату');
   if (amount === 0) return alert('Введи сумму');
-
   state.operations.push({
     id: Date.now() + Math.random().toString(36).slice(2, 6),
-    type: 'advance',
-    date,
-    monthKey: monthKey(date),
-    amount,
-    timestamp: Date.now(),
+    type: 'advance', date, monthKey: monthKey(date),
+    amount, timestamp: Date.now(),
   });
   saveState();
   closeModal(document.getElementById('saveAdvance'));
   render();
 };
 
+// ===== ЗП =====
 document.getElementById('salaryBtn').onclick = () => {
   const prev = new Date(viewMonth);
   prev.setMonth(prev.getMonth() - 1);
   const prevKey = monthKey(prev);
-
   let closeKey, closeMonthDate;
   if (!isMonthClosed(prevKey) && state.operations.some(o => o.monthKey === prevKey)) {
-    closeKey = prevKey;
-    closeMonthDate = prev;
+    closeKey = prevKey; closeMonthDate = prev;
   } else if (!isMonthClosed(monthKey(viewMonth)) && state.operations.some(o => o.monthKey === monthKey(viewMonth))) {
-    closeKey = monthKey(viewMonth);
-    closeMonthDate = viewMonth;
+    closeKey = monthKey(viewMonth); closeMonthDate = viewMonth;
   } else {
     return alert('Нет незакрытых месяцев с операциями');
   }
-
   const s = getMonthSummary(closeKey);
   document.getElementById('salaryTitle').textContent = '💼 Закрытие ' + monthLabel(closeMonthDate);
   document.getElementById('salaryPreview').innerHTML = `
@@ -661,7 +945,6 @@ document.getElementById('salaryBtn').onclick = () => {
   document.getElementById('salaryModal').dataset.closeKey = closeKey;
   openModal('salaryModal');
 };
-
 document.getElementById('salaryFact').addEventListener('input', () => {
   const fact = parseInt(document.getElementById('salaryFact').value) || 0;
   const closeKey = document.getElementById('salaryModal').dataset.closeKey;
@@ -672,37 +955,335 @@ document.getElementById('salaryFact').addEventListener('input', () => {
   diffEl.className = 'profit-preview';
   diffEl.innerHTML = `
     <div class="row diff ${diff >= 0 ? 'positive' : 'negative'}">
-      <span>Разница:</span>
-      <b>${fmtMoney(diff)}</b>
+      <span>Разница:</span><b>${fmtMoney(diff)}</b>
     </div>
   `;
 });
-
 document.getElementById('saveSalary').onclick = () => {
   const fact = parseInt(document.getElementById('salaryFact').value) || 0;
   const closeKey = document.getElementById('salaryModal').dataset.closeKey;
-  if (fact === 0) {
-    if (!confirm('Получил 0 ₽? Закрыть месяц?')) return;
-  }
-  const date = todayISO();
+  if (fact === 0 && !confirm('Получил 0 ₽? Закрыть месяц?')) return;
   state.operations.push({
     id: Date.now() + Math.random().toString(36).slice(2, 6),
-    type: 'salary',
-    date,
-    monthKey: closeKey,
-    fact,
-    timestamp: Date.now(),
+    type: 'salary', date: todayISO(), monthKey: closeKey,
+    fact, timestamp: Date.now(),
   });
   saveState();
   closeModal(document.getElementById('saveSalary'));
   render();
 };
 
+// ===== ОТЧЁТ С ГРАФИКАМИ =====
+document.getElementById('reportBtn').onclick = () => {
+  const key = monthKey(viewMonth);
+  const ops = state.operations.filter(o => o.monthKey === key);
+  const s = getMonthSummary(key);
+  const shifts = ops.filter(o => o.type === 'shift');
+  const avgSalary = shifts.length ? Math.round(shifts.reduce((sum,o) => sum + o.salary, 0) / shifts.length) : 0;
+
+  // Группировка по дням
+  const [year, monthNum] = key.split('-').map(Number);
+  const daysInMonth = new Date(year, monthNum, 0).getDate();
+  const dailyIn = {};
+  const dailyOut = {};
+  for (let d = 1; d <= daysInMonth; d++) { dailyIn[d] = 0; dailyOut[d] = 0; }
+  ops.forEach(o => {
+    const day = parseInt(o.date.split('-')[2]);
+    if (o.type === 'shift') dailyIn[day] += o.salary + (o.tips || 0);
+    else if (o.type === 'tip') dailyIn[day] += o.tips;
+    else if (o.type === 'expense') dailyOut[day] += o.amount;
+  });
+
+  const maxIn = Math.max(...Object.values(dailyIn), 1);
+  const maxOut = Math.max(...Object.values(dailyOut), 1);
+  const maxVal = Math.max(maxIn, maxOut);
+
+  // Столбцы
+  let chartHtml = '<div class="chart-days">';
+  for (let d = 1; d <= daysInMonth; d++) {
+    const hIn = dailyIn[d] ? Math.max(2, (dailyIn[d] / maxVal) * 150) : 0;
+    const hOut = dailyOut[d] ? Math.max(2, (dailyOut[d] / maxVal) * 150) : 0;
+    chartHtml += `
+      <div class="chart-day-col">
+        ${hIn ? `<div class="bar-in" style="height:${hIn}px"></div>` : ''}
+        ${hOut ? `<div class="bar-out" style="height:${hOut}px"></div>` : ''}
+        ${d % 5 === 0 || d === 1 ? `<div class="day-num">${d}</div>` : ''}
+      </div>
+    `;
+  }
+  chartHtml += '</div>';
+  chartHtml += `
+    <div class="chart-legend">
+      <span class="green">Доход</span>
+      <span class="red">Расход</span>
+    </div>
+  `;
+
+  // Пирог по категориям
+  const byCategory = {};
+  ops.filter(o => o.type === 'expense').forEach(o => {
+    byCategory[o.category] = (byCategory[o.category] || 0) + o.amount;
+  });
+  const catEntries = Object.entries(byCategory).sort((a,b) => b[1] - a[1]);
+  const totalExp = catEntries.reduce((s, [,v]) => s + v, 0);
+
+  let pieHtml = '';
+  if (catEntries.length > 0) {
+    let acc = 0;
+    const stops = catEntries.map(([cat, val], i) => {
+      const pct = (val / totalExp) * 100;
+      const start = acc;
+      acc += pct;
+      return `${PIE_COLORS[i % PIE_COLORS.length]} ${start}% ${acc}%`;
+    }).join(', ');
+
+    pieHtml = `
+      <h4 style="margin:16px 0 8px;font-size:13px;color:#888;">🥧 По категориям</h4>
+      <div class="pie-wrap">
+        <div class="pie" style="background: conic-gradient(${stops});"></div>
+        <div class="pie-legend">
+          ${catEntries.map(([cat, val], i) => {
+            const pct = Math.round((val / totalExp) * 100);
+            return `
+              <div class="pie-legend-row">
+                <span>
+                  <span class="color-dot" style="background:${PIE_COLORS[i % PIE_COLORS.length]};"></span>
+                  ${cat}
+                </span>
+                <span>
+                  <span class="amount">${fmtMoney(val)}</span>
+                  <span style="color:#888;font-size:11px;"> ${pct}%</span>
+                </span>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  let html = `
+    <div class="profit-preview">
+      <div class="row"><span>Смен отработано:</span><b>${shifts.length}</b></div>
+      <div class="row"><span>Средняя ЗП за смену:</span><b>${fmtMoney(avgSalary)}</b></div>
+      <div class="row"><span>Всего ЗП:</span><b>${fmtMoney(s.salary)}</b></div>
+      <div class="row"><span>Аванс:</span><b>${fmtMoney(s.advance)}</b></div>
+      <div class="row"><span>Чаевые:</span><b>${fmtMoney(s.tips)}</b></div>
+      <div class="row"><span>Расходы:</span><b>${fmtMoney(s.expenses)}</b></div>
+      <div class="row diff ${s.savings >= 0 ? 'positive' : 'negative'}">
+        <span>${s.savings >= 0 ? '💰 Экономия' : '💸 Перерасход'}:</span>
+        <b>${fmtMoney(s.savings)}</b>
+      </div>
+    </div>
+    <h4 style="margin:16px 0 8px;font-size:13px;color:#888;">📊 По дням месяца</h4>
+    ${chartHtml}
+    ${pieHtml}
+  `;
+
+  document.getElementById('reportContent').innerHTML = html;
+  openModal('reportModal');
+};
+
+// ===== КАЛЕНДАРЬ =====
+let calMonth = new Date();
+let calSelectedDay = null;
+
+document.getElementById('calendarBtn').onclick = () => {
+  calMonth = new Date(viewMonth);
+  calSelectedDay = null;
+  renderCalendar();
+  openModal('calendarModal');
+};
+
+function renderCalendar() {
+  const [year, monthNum] = [calMonth.getFullYear(), calMonth.getMonth()];
+  document.getElementById('calendarTitle').textContent = `📅 ${MONTHS_RU[monthNum]} ${year}`;
+
+  const key = monthKey(calMonth);
+  const ops = state.operations.filter(o => o.monthKey === key);
+
+  const dailyIn = {};
+  const dailyOut = {};
+  ops.forEach(o => {
+    const day = parseInt(o.date.split('-')[2]);
+    if (!dailyIn[day]) dailyIn[day] = 0;
+    if (!dailyOut[day]) dailyOut[day] = 0;
+    if (o.type === 'shift') dailyIn[day] += o.salary + (o.tips || 0);
+    else if (o.type === 'tip') dailyIn[day] += o.tips;
+    else if (o.type === 'expense') dailyOut[day] += o.amount;
+  });
+
+  const firstDay = new Date(year, monthNum, 1).getDay();
+  const daysInMonth = new Date(year, monthNum + 1, 0).getDate();
+  const offset = (firstDay === 0 ? 6 : firstDay - 1); // Пн первый
+
+  const today = new Date();
+  const isThisMonth = today.getFullYear() === year && today.getMonth() === monthNum;
+  const todayDay = today.getDate();
+
+  let html = '';
+  ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'].forEach(d => {
+    html += `<div class="cal-head">${d}</div>`;
+  });
+  for (let i = 0; i < offset; i++) {
+    html += `<div class="cal-day empty-day"></div>`;
+  }
+  for (let d = 1; d <= daysInMonth; d++) {
+    const inc = dailyIn[d] || 0;
+    const out = dailyOut[d] || 0;
+    let cls = '';
+    if (inc > 0 && inc >= out) cls = 'green';
+    else if (inc > 0 && inc < out) cls = 'yellow';
+    else if (out > 0) cls = 'red';
+    const isToday = isThisMonth && d === todayDay;
+    const amountText = inc > 0 ? '+' + Math.round(inc) : (out > 0 ? '−' + Math.round(out) : '');
+    html += `
+      <div class="cal-day ${cls} ${isToday ? 'today' : ''}" data-day="${d}">
+        <div class="day-num">${d}</div>
+        <div class="day-amount">${amountText}</div>
+      </div>
+    `;
+  }
+
+  document.getElementById('calendarGrid').innerHTML = html;
+  document.getElementById('calendarDayDetail').innerHTML = '';
+
+  document.querySelectorAll('#calendarGrid .cal-day:not(.empty-day)').forEach(el => {
+    el.onclick = () => showDayDetail(parseInt(el.dataset.day));
+  });
+}
+
+function showDayDetail(day) {
+  const key = monthKey(calMonth);
+  const dateStr = `${calMonth.getFullYear()}-${String(calMonth.getMonth()+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+  const ops = state.operations.filter(o => o.date === dateStr);
+
+  if (ops.length === 0) {
+    document.getElementById('calendarDayDetail').innerHTML = `
+      <div class="empty">Нет операций за ${fmtDate(dateStr)}</div>
+    `;
+    return;
+  }
+
+  const html = ops.map(op => {
+    let icon, label, amount, cls;
+    if (op.type === 'shift') { icon = '📊'; label = 'Смена'; amount = fmtMoney(op.salary + (op.tips||0)); cls = 'income'; }
+    else if (op.type === 'tip') { icon = '💵'; label = 'Чаевые'; amount = fmtMoney(op.tips); cls = 'income'; }
+    else if (op.type === 'expense') { icon = '➖'; label = op.category; amount = '−' + fmtMoney(op.amount); cls = 'expense'; }
+    else if (op.type === 'advance') { icon = '🏦'; label = 'Аванс'; amount = fmtMoney(op.amount); cls = 'neutral'; }
+    else if (op.type === 'salary') { icon = '💼'; label = 'ЗП факт'; amount = fmtMoney(op.fact); cls = 'neutral'; }
+    return `
+      <div class="history-item">
+        <div><span class="type-icon">${icon}</span>${label}</div>
+        <div class="amount ${cls}">${amount}</div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('calendarDayDetail').innerHTML = `
+    <h4 style="font-size:13px;color:#888;margin:0 0 6px;">${fmtDate(dateStr)}</h4>
+    ${html}
+  `;
+}
+
+// ===== ДОЛГИ =====
+document.getElementById('debtsBtn').onclick = () => {
+  renderDebts();
+  openModal('debtsModal');
+};
+
+document.getElementById('tabIOwe').onclick = () => {
+  currentDebtTab = 'i-owe';
+  document.getElementById('tabIOwe').classList.add('active');
+  document.getElementById('tabOweMe').classList.remove('active');
+  renderDebts();
+};
+document.getElementById('tabOweMe').onclick = () => {
+  currentDebtTab = 'owe-me';
+  document.getElementById('tabOweMe').classList.add('active');
+  document.getElementById('tabIOwe').classList.remove('active');
+  renderDebts();
+};
+
+function renderDebts() {
+  const filtered = debts.filter(d => d.type === currentDebtTab);
+  const active = filtered.filter(d => !d.closed);
+  const closed = filtered.filter(d => d.closed);
+
+  const el = document.getElementById('debtsList');
+  if (filtered.length === 0) {
+    el.innerHTML = '<div class="empty">Нет долгов</div>';
+    return;
+  }
+
+  const htmlActive = active.map(d => debtHtml(d)).join('');
+  const htmlClosed = closed.length
+    ? `<h4 style="font-size:12px;color:#666;margin:14px 0 8px;text-transform:uppercase;">Закрытые</h4>${closed.map(d => debtHtml(d)).join('')}`
+    : '';
+
+  el.innerHTML = htmlActive + htmlClosed;
+
+  el.querySelectorAll('[data-close-debt]').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.dataset.closeDebt;
+      const debt = debts.find(d => d.id === id);
+      if (!debt) return;
+      if (!confirm(`Закрыть долг с ${debt.name}?`)) return;
+      debt.closed = true;
+      debt.closedAt = Date.now();
+      saveDebts();
+      renderDebts();
+    };
+  });
+}
+
+function debtHtml(d) {
+  const sumClass = d.type === 'i-owe' ? 'i-owe' : 'owe-me';
+  return `
+    <div class="debt-item ${d.closed ? 'closed' : ''}">
+      <div class="top">
+        <span class="name">${d.name}</span>
+        <span class="sum ${sumClass}">${fmtMoney(d.amount)}</span>
+      </div>
+      <div class="bottom">
+        <span>${d.note ? d.note + ' · ' : ''}${fmtDate(d.date)}</span>
+        ${!d.closed ? `<button class="btn-close-debt" data-close-debt="${d.id}">Вернул</button>` : '<span>✅ закрыт</span>'}
+      </div>
+    </div>
+  `;
+}
+
+document.getElementById('addDebtBtn').onclick = () => {
+  document.getElementById('debtType').value = currentDebtTab;
+  document.getElementById('debtName').value = '';
+  document.getElementById('debtAmount').value = '';
+  document.getElementById('debtNote').value = '';
+  openModal('debtAddModal');
+};
+document.getElementById('saveDebt').onclick = () => {
+  const type = document.getElementById('debtType').value;
+  const name = document.getElementById('debtName').value.trim();
+  const amount = parseInt(document.getElementById('debtAmount').value) || 0;
+  const note = document.getElementById('debtNote').value.trim();
+  if (!name) return alert('Введи имя');
+  if (amount === 0) return alert('Введи сумму');
+  debts.push({
+    id: Date.now() + Math.random().toString(36).slice(2, 6),
+    type, name, amount, note,
+    date: todayISO(),
+    closed: false,
+    timestamp: Date.now(),
+  });
+  saveDebts();
+  closeModal(document.getElementById('saveDebt'));
+  renderDebts();
+};
+
+// ===== КАТЕГОРИИ =====
 document.getElementById('settingsBtn').onclick = () => {
   renderCategories();
   openModal('settingsModal');
 };
-
 function renderCategories() {
   const el = document.getElementById('categoriesList');
   if (categories.length === 0) {
@@ -725,7 +1306,6 @@ function renderCategories() {
     };
   });
 }
-
 document.getElementById('addCategory').onclick = () => {
   const val = document.getElementById('newCategory').value.trim();
   if (!val) return;
@@ -736,51 +1316,7 @@ document.getElementById('addCategory').onclick = () => {
   renderCategories();
 };
 
-document.getElementById('reportBtn').onclick = () => {
-  const key = monthKey(viewMonth);
-  const ops = state.operations.filter(o => o.monthKey === key);
-
-  const byCategory = {};
-  ops.filter(o => o.type === 'expense').forEach(o => {
-    byCategory[o.category] = (byCategory[o.category] || 0) + o.amount;
-  });
-
-  const shifts = ops.filter(o => o.type === 'shift');
-  const avgSalary = shifts.length ? Math.round(shifts.reduce((s,o) => s + o.salary, 0) / shifts.length) : 0;
-
-  const s = getMonthSummary(key);
-
-  let html = `
-    <div class="profit-preview">
-      <div class="row"><span>Смен отработано:</span><b>${shifts.length}</b></div>
-      <div class="row"><span>Средняя ЗП за смену:</span><b>${fmtMoney(avgSalary)}</b></div>
-      <div class="row"><span>Всего ЗП:</span><b>${fmtMoney(s.salary)}</b></div>
-      <div class="row"><span>Аванс:</span><b>${fmtMoney(s.advance)}</b></div>
-      <div class="row"><span>Чаевые:</span><b>${fmtMoney(s.tips)}</b></div>
-      <div class="row"><span>Расходы:</span><b>${fmtMoney(s.expenses)}</b></div>
-      <div class="row diff ${s.savings >= 0 ? 'positive' : 'negative'}">
-        <span>${s.savings >= 0 ? '💰 Экономия' : '💸 Перерасход'}:</span>
-        <b>${fmtMoney(s.savings)}</b>
-      </div>
-    </div>
-  `;
-
-  if (Object.keys(byCategory).length) {
-    html += '<h4 style="margin:16px 0 8px;font-size:13px;color:#888;">По категориям:</h4>';
-    html += Object.entries(byCategory)
-      .sort((a, b) => b[1] - a[1])
-      .map(([cat, sum]) => `
-        <div class="summary-row">
-          <span>${cat}</span>
-          <b class="amount">${fmtMoney(sum)}</b>
-        </div>
-      `).join('');
-  }
-
-  document.getElementById('reportContent').innerHTML = html;
-  openModal('reportModal');
-};
-
+// ===== CSV =====
 document.getElementById('exportBtn').onclick = () => {
   if (state.operations.length === 0) return alert('Нет данных');
 
@@ -811,12 +1347,12 @@ function downloadCSV(rows, filename) {
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
+  a.href = url; a.download = filename;
   a.click();
   URL.revokeObjectURL(url);
 }
 
+// ===== НАВИГАЦИЯ МЕСЯЦЕВ =====
 document.getElementById('prevMonth').onclick = () => {
   viewMonth = new Date(viewMonth);
   viewMonth.setMonth(viewMonth.getMonth() - 1);
@@ -828,13 +1364,7 @@ document.getElementById('nextMonth').onclick = () => {
   render();
 };
 
-document.querySelectorAll('[data-close]').forEach(btn => {
-  btn.onclick = (e) => closeModal(e.target);
-});
-document.querySelectorAll('.modal-bg').forEach(bg => {
-  bg.onclick = (e) => { if (e.target === bg) bg.classList.remove('open'); };
-});
-
+// ===== PWA =====
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
