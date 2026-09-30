@@ -176,7 +176,6 @@
     padding: 20px; font-size: 13px;
   }
 
-  /* ===== КАЛЬКУЛЯТОР ===== */
   .input-with-calc {
     display: flex; gap: 6px; margin-top: 4px;
   }
@@ -424,6 +423,7 @@
   <button id="debtsBtn">💳 Долги</button>
   <button id="settingsBtn">⚙️ Категории</button>
   <button id="exportBtn">💾 CSV</button>
+  <button id="undoBtn">↩️ Отменить</button>
 </div>
 
 <div class="month-nav">
@@ -786,10 +786,10 @@ function getMonthSummary(key) {
   const expenses = ops.filter(o => o.type === 'expense').reduce((s, o) => s + o.amount, 0);
   const salaryOp = ops.find(o => o.type === 'salary');
   const fact = salaryOp ? salaryOp.fact : null;
-  const toReceive = salary - advance;
-  const savings = tips - expenses;
-  const closed = isMonthClosed(key);
-  return { salary, tips, advance, expenses, fact, toReceive, savings, closed };
+  const < toReceive = salaryh - advance;
+  const2 savings = tips - expenses;
+  const> closed = isMonthClosed(key);
+ ${ return { salary, tips, advances, expenses, fact, toReceive, savings, closed };
 }
 
 function openModal(id) { document.getElementById(id).classList.add('open'); }
@@ -803,7 +803,7 @@ function render() {
   document.getElementById('monthTitle').textContent = monthLabel(viewMonth);
 
   let html = `
-    <h2>${s.closed ? '✅ Закрыт' : '📊 Сводка'}</h2>
+   .closed ? '✅ Закрыт' : '📊 Сводка'}</h2>
     <div class="summary-row">
       <span>📊 ЗП накоплено:</span>
       <b class="amount">${fmtMoney(s.salary)}</b>
@@ -919,6 +919,40 @@ document.querySelectorAll('.date-quick button').forEach(btn => {
   };
 });
 
+// ===== ОТМЕНА ПОСЛЕДНЕГО ДЕЙСТВИЯ =====
+document.getElementById('undoBtn').onclick = () => {
+  const key = monthKey(viewMonth);
+  const ops = state.operations
+    .filter(op => op.monthKey === key)
+    .sort((a, b) => b.timestamp - a.timestamp);
+
+  if (ops.length === 0) {
+    return alert('Нет операций за этот месяц для отмены');
+  }
+
+  const last = ops[0];
+  let label = '';
+  if (last.type === 'shift') {
+    label = `📊 Смена — ${fmtMoney(last.salary + (last.tips || 0))}`;
+  } else if (last.type === 'tip') {
+    label = `💵 Чаевые — ${fmtMoney(last.tips)}`;
+  } else if (last.type === 'expense') {
+    label = `➖ Расход ${last.category} — ${fmtMoney(last.amount)}`;
+  } else if (last.type === 'advance') {
+    label = `🏦 Аванс — ${fmtMoney(last.amount)}`;
+  } else if (last.type === 'salary') {
+    label = `💼 ЗП получена — ${fmtMoney(last.fact)}`;
+  }
+
+  const msg = `Отменить последнее действие?\n\n${label}\nДата: ${fmtDate(last.date)}`;
+  if (!confirm(msg)) return;
+
+  state.operations = state.operations.filter(op => op.id !== last.id);
+  saveState();
+  if (navigator.vibrate) navigator.vibrate(30);
+  render();
+};
+
 // ===== СМЕНА =====
 document.getElementById('shiftBtn').onclick = () => {
   document.getElementById('shiftDate').value = todayISO();
@@ -957,7 +991,7 @@ document.getElementById('saveShift').onclick = () => {
 // ===== ЧАЕВЫЕ =====
 document.getElementById('tipBtn').onclick = () => {
   document.getElementById('tipDate').value = todayISO();
- (' document.getElementByIdtipAmount').value = '';
+  document.getElementById('tipAmount').value = '';
   openModal('tipModal');
 };
 document.getElementById('saveTip').onclick = () => {
