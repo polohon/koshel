@@ -176,6 +176,79 @@
     padding: 20px; font-size: 13px;
   }
 
+  /* ===== КАЛЬКУЛЯТОР ===== */
+  .input-with-calc {
+    display: flex; gap: 6px; margin-top: 4px;
+  }
+  .input-with-calc input {
+    flex: 1; margin-top: 0 !important;
+  }
+  .btn-calc-icon {
+    background: #2a2a2a; border: 1px solid #333;
+    color: #4fc3f7; font-size: 18px;
+    padding: 0 14px; border-radius: 8px;
+    cursor: pointer; min-width: 48px;
+  }
+  .btn-calc-icon:active {
+    background: #4fc3f7; color: #000;
+  }
+
+  .calc-row {
+    background: #121212; border-radius: 8px;
+    padding: 10px 12px; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .calc-row .info { flex: 1; min-width: 0; }
+  .calc-row .name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+  .calc-row .meta { font-size: 11px; color: #888; }
+  .calc-row input {
+    width: 60px; padding: 8px; background: #2a2a2a;
+    color: #fff; border: 1px solid #333;
+    border-radius: 6px; font-size: 14px;
+    text-align: center; font-family: inherit;
+  }
+  .calc-row input:focus { outline: none; border-color: #4fc3f7; }
+  .calc-row .result {
+    min-width: 70px; text-align: right;
+    font-family: ui-monospace, monospace;
+    font-size: 13px; font-weight: 700; color: #4caf50;
+  }
+
+  .calc-total {
+    background: #1e1e1e; border-radius: 10px;
+    padding: 12px; margin: 12px 0;
+    display: flex; justify-content: space-between;
+    align-items: center;
+  }
+  .calc-total .label { font-size: 14px; color: #bbb; }
+  .calc-total .sum {
+    font-family: ui-monospace, monospace;
+    font-size: 22px; font-weight: 800; color: #4caf50;
+  }
+
+  .position-item {
+    background: #121212; border-radius: 8px;
+    padding: 10px 12px; margin-bottom: 6px;
+  }
+  .position-item .top {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 4px;
+  }
+  .position-item .name { font-weight: 700; font-size: 13px; }
+  .position-item .percent {
+    font-family: ui-monospace, monospace;
+    font-size: 13px; color: #4caf50; font-weight: 700;
+  }
+  .position-item .bottom {
+    display: flex; justify-content: space-between;
+    align-items: center; font-size: 11px; color: #888;
+  }
+  .position-item .btns { display: flex; gap: 6px; }
+  .position-item .btns button {
+    background: transparent; border: none;
+    cursor: pointer; font-size: 14px; padding: 2px 4px;
+  }
+
   .chart-days {
     display: flex; align-items: flex-end;
     height: 180px; gap: 2px;
@@ -218,7 +291,6 @@
   }
   .chart-legend .green::before { background: #4caf50; }
   .chart-legend .red::before { background: #f44336; }
-  .chart-legend .yellow::before { background: #ffc107; }
 
   .pie-wrap {
     display: flex; align-items: center; gap: 16px;
@@ -387,7 +459,10 @@
       </div>
     </label>
     <label>ЗП за смену (₽)
-      <input type="number" id="shiftSalary" placeholder="0" inputmode="numeric">
+      <div class="input-with-calc">
+        <input type="number" id="shiftSalary" placeholder="0" inputmode="numeric">
+        <button type="button" class="btn-calc-icon" id="calcPositionsBtn" title="Рассчитать">🧮</button>
+      </div>
     </label>
     <label>Чаевые (₽)
       <input type="number" id="shiftTips" placeholder="0" inputmode="numeric">
@@ -502,7 +577,6 @@
     <div class="cal-grid" id="calendarGrid"></div>
     <div class="chart-legend" style="margin-top:12px;">
       <span class="green">заработал</span>
-      <span class="yellow">частично</span>
       <span class="red">только расход</span>
     </div>
     <div id="calendarDayDetail" style="margin-top:12px;"></div>
@@ -554,6 +628,42 @@
   </div>
 </div>
 
+<!-- Модалка: Расчёт по позициям -->
+<div class="modal-bg" id="calcModal">
+  <div class="modal">
+    <h3>🧮 Расчёт ЗП</h3>
+    <div id="calcList"></div>
+    <div class="calc-total">
+      <span class="label">💰 Итого:</span>
+      <span class="sum" id="calcTotal">0 ₽</span>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" id="editPositionsBtn">⚙️ Позиции</button>
+      <button class="btn-save" id="applyCalc">✅ Применить</button>
+    </div>
+  </div>
+</div>
+
+<!-- Модалка: Настройка позиций -->
+<div class="modal-bg" id="positionsModal">
+  <div class="modal">
+    <h3>⚙️ Позиции и заработок</h3>
+    <div id="positionsList"></div>
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid #2a2a2a;">
+      <label>Название
+        <input type="text" id="posName" placeholder="☕ Кофе">
+      </label>
+      <label>Заработок за 1 шт (₽)
+        <input type="number" id="posEarn" placeholder="10" step="0.5" inputmode="decimal">
+      </label>
+      <button class="btn-save" id="addPositionBtn" style="width:100%;">➕ Добавить позицию</button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" data-close>Закрыть</button>
+    </div>
+  </div>
+</div>
+
 <!-- Модалка: Категории -->
 <div class="modal-bg" id="settingsModal">
   <div class="modal">
@@ -573,6 +683,7 @@
 const STORAGE_KEY = 'koshel_v1';
 const CATEGORIES_KEY = 'koshel_categories_v1';
 const DEBTS_KEY = 'koshel_debts_v1';
+const POSITIONS_KEY = 'koshel_positions_v1';
 
 const MONTHS_RU = ['Январь','Февраль','Март','Апрель','Май','Июнь',
                    'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
@@ -593,6 +704,8 @@ const PIE_COLORS = [
 let state = loadState();
 let categories = loadCategories();
 let debts = loadDebts();
+let positions = loadPositions();
+let calcValues = {};
 let viewMonth = new Date();
 let currentDebtTab = 'i-owe';
 let calMonth = new Date();
@@ -623,6 +736,15 @@ function loadDebts() {
   return [];
 }
 function saveDebts() { localStorage.setItem(DEBTS_KEY, JSON.stringify(debts)); }
+
+function loadPositions() {
+  try {
+    const raw = localStorage.getItem(POSITIONS_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e){}
+  return [];
+}
+function savePositions() { localStorage.setItem(POSITIONS_KEY, JSON.stringify(positions)); }
 
 function monthKey(date) {
   const d = new Date(date);
@@ -802,6 +924,7 @@ document.getElementById('shiftBtn').onclick = () => {
   document.getElementById('shiftDate').value = todayISO();
   document.getElementById('shiftSalary').value = '';
   document.getElementById('shiftTips').value = '0';
+  document.getElementById('calcModal').dataset.details = '';
   openModal('shiftModal');
 };
 document.getElementById('saveShift').onclick = () => {
@@ -810,12 +933,23 @@ document.getElementById('saveShift').onclick = () => {
   const tips = parseInt(document.getElementById('shiftTips').value) || 0;
   if (!date) return alert('Укажи дату');
   if (salary === 0 && tips === 0) return alert('Введи сумму');
+
+  const calcEl = document.getElementById('calcModal');
+  const details = calcEl.dataset.details;
+  let positionsDetail = null;
+  if (details) {
+    try { positionsDetail = JSON.parse(details); } catch(e){}
+  }
+
   state.operations.push({
     id: Date.now() + Math.random().toString(36).slice(2, 6),
     type: 'shift', date, monthKey: monthKey(date),
-    salary, tips, timestamp: Date.now(),
+    salary, tips,
+    positionsDetail,
+    timestamp: Date.now(),
   });
   saveState();
+  calcEl.dataset.details = '';
   closeModal(document.getElementById('saveShift'));
   render();
 };
@@ -823,7 +957,7 @@ document.getElementById('saveShift').onclick = () => {
 // ===== ЧАЕВЫЕ =====
 document.getElementById('tipBtn').onclick = () => {
   document.getElementById('tipDate').value = todayISO();
-  document.getElementById('tipAmount').value = '';
+ (' document.getElementByIdtipAmount').value = '';
   openModal('tipModal');
 };
 document.getElementById('saveTip').onclick = () => {
@@ -939,6 +1073,160 @@ document.getElementById('saveSalary').onclick = () => {
   saveState();
   closeModal(document.getElementById('saveSalary'));
   render();
+};
+
+// ===== КАЛЬКУЛЯТОР ЗП =====
+document.getElementById('calcPositionsBtn').onclick = () => {
+  if (positions.length === 0) {
+    if (confirm('Ещё нет позиций. Добавить первую сейчас?')) {
+      document.getElementById('editPositionsBtn').click();
+    }
+    return;
+  }
+  calcValues = {};
+  renderCalcList();
+  openModal('calcModal');
+};
+
+function renderCalcList() {
+  const el = document.getElementById('calcList');
+  if (positions.length === 0) {
+    el.innerHTML = '<div class="empty">Нет позиций</div>';
+    updateCalcTotal();
+    return;
+  }
+  el.innerHTML = positions.map(p => {
+    const qty = calcValues[p.id] || 0;
+    const result = Math.round(qty * p.earn);
+    return `
+      <div class="calc-row">
+        <div class="info">
+          <div class="name">${p.name}</div>
+          <div class="meta">${p.earn} ₽ за шт</div>
+        </div>
+        <input type="number" min="0" inputmode="numeric"
+               data-calc-id="${p.id}" value="${qty || ''}"
+               placeholder="0">
+        <div class="result">${result ? result + ' ₽' : '—'}</div>
+      </div>
+    `;
+  }).join('');
+
+  el.querySelectorAll('input[data-calc-id]').forEach(inp => {
+    inp.oninput = () => {
+      const id = inp.dataset.calcId;
+      const v = parseInt(inp.value) || 0;
+      calcValues[id] = v;
+      const p = positions.find(x => x.id === id);
+      const result = Math.round(v * p.earn);
+      inp.parentElement.querySelector('.result').textContent = result ? result + ' ₽' : '—';
+      updateCalcTotal();
+    };
+  });
+
+  updateCalcTotal();
+}
+
+function updateCalcTotal() {
+  let total = 0;
+  for (const id in calcValues) {
+    const p = positions.find(x => x.id === id);
+    if (!p) continue;
+    total += calcValues[id] * p.earn;
+  }
+  document.getElementById('calcTotal').textContent = fmtMoney(Math.round(total));
+}
+
+document.getElementById('applyCalc').onclick = () => {
+  let total = 0;
+  const details = [];
+  for (const id in calcValues) {
+    const qty = calcValues[id];
+    if (!qty) continue;
+    const p = positions.find(x => x.id === id);
+    if (!p) continue;
+    const sum = Math.round(qty * p.earn);
+    total += sum;
+    details.push({ name: p.name, qty, earn: p.earn, sum });
+  }
+  if (total === 0) {
+    alert('Введи количество хотя бы в одной позиции');
+    return;
+  }
+  document.getElementById('shiftSalary').value = Math.round(total);
+  document.getElementById('calcModal').dataset.details = JSON.stringify(details);
+  closeModal(document.getElementById('applyCalc'));
+};
+
+document.getElementById('editPositionsBtn').onclick = () => {
+  renderPositionsList();
+  openModal('positionsModal');
+};
+
+function renderPositionsList() {
+  const el = document.getElementById('positionsList');
+  if (positions.length === 0) {
+    el.innerHTML = '<div class="empty">Пока нет позиций</div>';
+    return;
+  }
+  el.innerHTML = positions.map(p => `
+    <div class="position-item">
+      <div class="top">
+        <span class="name">${p.name}</span>
+        <span class="percent">${p.earn} ₽/шт</span>
+      </div>
+      <div class="bottom">
+        <span></span>
+        <div class="btns">
+          <button data-edit-pos="${p.id}">✏️</button>
+          <button data-del-pos="${p.id}">🗑️</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  el.querySelectorAll('[data-del-pos]').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.dataset.delPos;
+      const p = positions.find(x => x.id === id);
+      if (!p) return;
+      if (!confirm(`Удалить "${p.name}"?`)) return;
+      positions = positions.filter(x => x.id !== id);
+      savePositions();
+      renderPositionsList();
+    };
+  });
+
+  el.querySelectorAll('[data-edit-pos]').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.dataset.editPos;
+      const p = positions.find(x => x.id === id);
+      if (!p) return;
+      const newName = prompt('Название:', p.name);
+      if (newName === null) return;
+      const newEarn = prompt('Заработок за 1 шт (₽):', p.earn);
+      if (newEarn === null) return;
+      p.name = newName.trim() || p.name;
+      p.earn = parseFloat(newEarn) || p.earn;
+      savePositions();
+      renderPositionsList();
+    };
+  });
+}
+
+document.getElementById('addPositionBtn').onclick = () => {
+  const name = document.getElementById('posName').value.trim();
+  const earn = parseFloat(document.getElementById('posEarn').value) || 0;
+  if (!name) return alert('Введи название');
+  if (earn <= 0) return alert('Введи заработок');
+  positions.push({
+    id: Date.now() + Math.random().toString(36).slice(2, 6),
+    name, earn,
+  });
+  savePositions();
+  document.getElementById('posName').value = '';
+  document.getElementById('posEarn').value = '';
+  renderPositionsList();
 };
 
 // ===== ОТЧЁТ =====
