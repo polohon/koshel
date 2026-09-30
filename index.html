@@ -15,356 +15,122 @@
     user-select: none; -webkit-user-select: none;
   }
   h1 { font-size: 18px; text-align: center; margin: 0 0 8px; color: #eee; }
-
-  .month-nav {
-    display: flex; justify-content: center; align-items: center;
-    gap: 12px; margin-bottom: 10px;
-  }
-  .month-nav button {
-    background: #2a2a2a; color: #fff; border: none;
-    padding: 6px 12px; border-radius: 8px; font-size: 16px;
-    cursor: pointer;
-  }
-  .month-nav .month-title {
-    font-size: 17px; font-weight: 700; min-width: 150px; text-align: center;
-  }
-
-  .top-bar {
-    display: flex; justify-content: center; gap: 5px;
-    margin-bottom: 12px; flex-wrap: wrap;
-  }
-  .top-bar button {
-    background: #2a2a2a; color: #fff; border: none;
-    padding: 7px 10px; border-radius: 8px; font-size: 11px;
-    font-weight: 600; cursor: pointer;
-  }
+  .month-nav { display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .month-nav button { background: #2a2a2a; color: #fff; border: none; padding: 6px 12px; border-radius: 8px; font-size: 16px; cursor: pointer; }
+  .month-nav .month-title { font-size: 17px; font-weight: 700; min-width: 150px; text-align: center; }
+  .top-bar { display: flex; justify-content: center; gap: 5px; margin-bottom: 12px; flex-wrap: wrap; }
+  .top-bar button { background: #2a2a2a; color: #fff; border: none; padding: 7px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; }
   .top-bar button:active { transform: scale(0.97); }
-
-  .summary {
-    background: #1e1e1e; border-radius: 12px;
-    padding: 14px; margin-bottom: 12px;
-  }
-  .summary h2 {
-    font-size: 14px; color: #888; margin: 0 0 10px;
-    text-transform: uppercase; font-weight: 600;
-  }
-  .summary-row {
-    display: flex; justify-content: space-between;
-    font-size: 14px; padding: 5px 0; color: #bbb;
-  }
+  .summary { background: #1e1e1e; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+  .summary h2 { font-size: 14px; color: #888; margin: 0 0 10px; text-transform: uppercase; font-weight: 600; }
+  .summary-row { display: flex; justify-content: space-between; font-size: 14px; padding: 5px 0; color: #bbb; }
   .summary-row b { color: #fff; font-weight: 700; }
   .summary-row .amount { font-family: ui-monospace, monospace; }
   .summary-row.positive .amount { color: #4caf50; }
   .summary-row.negative .amount { color: #f44336; }
   .summary-row.accent .amount { color: #4fc3f7; }
-
   .summary-divider { height: 1px; background: #333; margin: 8px 0; }
-
-  .big-amount {
-    font-size: 24px; font-weight: 800;
-    font-family: ui-monospace, monospace;
-    text-align: center; padding: 12px 0;
-  }
+  .big-amount { font-size: 24px; font-weight: 800; font-family: ui-monospace, monospace; text-align: center; padding: 12px 0; }
   .big-amount.positive { color: #4caf50; }
   .big-amount.negative { color: #f44336; }
-
-  .actions {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 8px; margin-bottom: 12px;
-  }
-  .actions button {
-    padding: 14px 10px; border: none; border-radius: 10px;
-    font-size: 13px; font-weight: 700; cursor: pointer;
-    color: #fff;
-  }
+  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+  .actions button { padding: 14px 10px; border: none; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; color: #fff; }
   .actions button:active { transform: scale(0.97); }
   .actions .full { grid-column: 1 / -1; }
-  .btn-tip    { background: #4caf50; }
-  .btn-shift  { background: #2196f3; }
-  .btn-expense{ background: #f44336; }
-  .btn-advance{ background: #ff9800; }
+  .btn-tip { background: #4caf50; }
+  .btn-shift { background: #2196f3; }
+  .btn-expense { background: #f44336; }
+  .btn-advance { background: #ff9800; }
   .btn-salary { background: #9c27b0; }
-
-  .history {
-    background: #1e1e1e; border-radius: 12px; padding: 12px;
-    margin-bottom: 12px;
-  }
-  .history h2 {
-    font-size: 14px; color: #888; margin: 0 0 10px;
-    text-transform: uppercase; font-weight: 600;
-  }
-  .history-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 0; border-bottom: 1px solid #2a2a2a;
-    font-size: 13px;
-  }
+  .history { background: #1e1e1e; border-radius: 12px; padding: 12px; margin-bottom: 12px; }
+  .history h2 { font-size: 14px; color: #888; margin: 0 0 10px; text-transform: uppercase; font-weight: 600; }
+  .history-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #2a2a2a; font-size: 13px; gap: 8px; }
   .history-item:last-child { border-bottom: none; }
   .history-item .type-icon { margin-right: 6px; }
   .history-item .date { color: #888; font-size: 11px; }
-  .history-item .amount {
-    font-family: ui-monospace, monospace;
-    font-weight: 700;
-  }
+  .history-item .amount { font-family: ui-monospace, monospace; font-weight: 700; }
   .history-item .amount.income { color: #4caf50; }
   .history-item .amount.expense { color: #f44336; }
   .history-item .amount.neutral { color: #4fc3f7; }
-
-  .modal-bg {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.8);
-    display: none; align-items: center; justify-content: center;
-    z-index: 100; padding: 16px;
+  .history-item .btn-del-history {
+    background: transparent;
+    border: none;
+    color: #f44336;
+    font-size: 14px;
+    padding: 4px 6px;
+    margin-left: 6px;
+    cursor: pointer;
+    border-radius: 4px;
   }
+  .history-item .btn-del-history:active { background: rgba(244,67,54,0.2); }
+  .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 100; padding: 16px; }
   .modal-bg.open { display: flex; }
-  .modal {
-    background: #1e1e1e; border-radius: 14px; padding: 18px;
-    width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto;
-  }
+  .modal { background: #1e1e1e; border-radius: 14px; padding: 18px; width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; }
   .modal h3 { margin: 0 0 14px; font-size: 17px; }
-  .modal label {
-    display: block; margin-bottom: 12px;
-    font-size: 13px; color: #888;
-  }
-  .modal label input, .modal label select {
-    display: block; width: 100%; margin-top: 4px;
-    padding: 10px; background: #121212; color: #fff;
-    border: 1px solid #333; border-radius: 8px;
-    font-size: 15px;
-    font-family: inherit;
-  }
-  .modal label input:focus, .modal label select:focus {
-    outline: none; border-color: #4fc3f7;
-  }
+  .modal label { display: block; margin-bottom: 12px; font-size: 13px; color: #888; }
+  .modal label input, .modal label select { display: block; width: 100%; margin-top: 4px; padding: 10px; background: #121212; color: #fff; border: 1px solid #333; border-radius: 8px; font-size: 15px; font-family: inherit; }
+  .modal label input:focus, .modal label select:focus { outline: none; border-color: #4fc3f7; }
   .modal-actions { display: flex; gap: 8px; margin-top: 16px; }
-  .modal-actions button {
-    flex: 1; padding: 12px; border: none; border-radius: 8px;
-    font-size: 14px; font-weight: 700; cursor: pointer;
-  }
+  .modal-actions button { flex: 1; padding: 12px; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; }
   .btn-save { background: #4caf50; color: #fff; }
   .btn-cancel { background: #444; color: #fff; }
   .btn-danger { background: #f44336; color: #fff; }
-
-  .date-quick {
-    display: flex; gap: 6px; margin-top: 6px;
-  }
-  .date-quick button {
-    flex: 1; padding: 8px; border: none; border-radius: 6px;
-    background: #2a2a2a; color: #fff; font-size: 12px;
-    cursor: pointer; font-weight: 600;
-  }
+  .date-quick { display: flex; gap: 6px; margin-top: 6px; }
+  .date-quick button { flex: 1; padding: 8px; border: none; border-radius: 6px; background: #2a2a2a; color: #fff; font-size: 12px; cursor: pointer; font-weight: 600; }
   .date-quick button:active { background: #4fc3f7; color: #000; }
-
-  .profit-preview {
-    background: #121212; border-radius: 8px;
-    padding: 10px; margin: 10px 0;
-    font-size: 13px; color: #bbb;
-  }
-  .profit-preview .row {
-    display: flex; justify-content: space-between;
-    padding: 3px 0;
-  }
+  .profit-preview { background: #121212; border-radius: 8px; padding: 10px; margin: 10px 0; font-size: 13px; color: #bbb; }
+  .profit-preview .row { display: flex; justify-content: space-between; padding: 3px 0; }
   .profit-preview .row b { color: #fff; }
-  .profit-preview .row.diff {
-    padding-top: 8px; margin-top: 8px;
-    border-top: 1px solid #333; font-size: 15px;
-  }
+  .profit-preview .row.diff { padding-top: 8px; margin-top: 8px; border-top: 1px solid #333; font-size: 15px; }
   .profit-preview .row.diff b { color: #4fc3f7; font-size: 16px; }
   .profit-preview .row.diff.positive b { color: #4caf50; }
   .profit-preview .row.diff.negative b { color: #f44336; }
-
-  .empty {
-    text-align: center; color: #666;
-    padding: 20px; font-size: 13px;
-  }
-
-  .input-with-calc {
-    display: flex; gap: 6px; margin-top: 4px;
-  }
-  .input-with-calc input {
-    flex: 1; margin-top: 0 !important;
-  }
-  .btn-calc-icon {
-    background: #2a2a2a; border: 1px solid #333;
-    color: #4fc3f7; font-size: 18px;
-    padding: 0 14px; border-radius: 8px;
-    cursor: pointer; min-width: 48px;
-  }
-  .btn-calc-icon:active {
-    background: #4fc3f7; color: #000;
-  }
-
-  .calc-row {
-    background: #121212; border-radius: 8px;
-    padding: 10px 12px; margin-bottom: 8px;
-    display: flex; align-items: center; gap: 8px;
-  }
+  .empty { text-align: center; color: #666; padding: 20px; font-size: 13px; }
+  .input-with-calc { display: flex; gap: 6px; margin-top: 4px; }
+  .input-with-calc input { flex: 1; margin-top: 0 !important; }
+  .btn-calc-icon { background: #2a2a2a; border: 1px solid #333; color: #4fc3f7; font-size: 18px; padding: 0 14px; border-radius: 8px; cursor: pointer; min-width: 48px; }
+  .btn-calc-icon:active { background: #4fc3f7; color: #000; }
+  .calc-row { background: #121212; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
   .calc-row .info { flex: 1; min-width: 0; }
   .calc-row .name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
   .calc-row .meta { font-size: 11px; color: #888; }
-  .calc-row input {
-    width: 60px; padding: 8px; background: #2a2a2a;
-    color: #fff; border: 1px solid #333;
-    border-radius: 6px; font-size: 14px;
-    text-align: center; font-family: inherit;
-  }
+  .calc-row input { width: 60px; padding: 8px; background: #2a2a2a; color: #fff; border: 1px solid #333; border-radius: 6px; font-size: 14px; text-align: center; font-family: inherit; }
   .calc-row input:focus { outline: none; border-color: #4fc3f7; }
-  .calc-row .result {
-    min-width: 70px; text-align: right;
-    font-family: ui-monospace, monospace;
-    font-size: 13px; font-weight: 700; color: #4caf50;
-  }
-
-  .calc-total {
-    background: #1e1e1e; border-radius: 10px;
-    padding: 12px; margin: 12px 0;
-    display: flex; justify-content: space-between;
-    align-items: center;
-  }
+  .calc-row .result { min-width: 70px; text-align: right; font-family: ui-monospace, monospace; font-size: 13px; font-weight: 700; color: #4caf50; }
+  .calc-total { background: #1e1e1e; border-radius: 10px; padding: 12px; margin: 12px 0; display: flex; justify-content: space-between; align-items: center; }
   .calc-total .label { font-size: 14px; color: #bbb; }
-  .calc-total .sum {
-    font-family: ui-monospace, monospace;
-    font-size: 22px; font-weight: 800; color: #4caf50;
-  }
-
-  .position-item {
-    background: #121212; border-radius: 8px;
-    padding: 10px 12px; margin-bottom: 6px;
-  }
-  .position-item .top {
-    display: flex; justify-content: space-between;
-    align-items: center; margin-bottom: 4px;
-  }
+  .calc-total .sum { font-family: ui-monospace, monospace; font-size: 22px; font-weight: 800; color: #4caf50; }
+  .position-item { background: #121212; border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; }
+  .position-item .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
   .position-item .name { font-weight: 700; font-size: 13px; }
-  .position-item .percent {
-    font-family: ui-monospace, monospace;
-    font-size: 13px; color: #4caf50; font-weight: 700;
-  }
-  .position-item .bottom {
-    display: flex; justify-content: space-between;
-    align-items: center; font-size: 11px; color: #888;
-  }
+  .position-item .percent { font-family: ui-monospace, monospace; font-size: 13px; color: #4caf50; font-weight: 700; }
+  .position-item .bottom { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #888; }
   .position-item .btns { display: flex; gap: 6px; }
-  .position-item .btns button {
-    background: transparent; border: none;
-    cursor: pointer; font-size: 14px; padding: 2px 4px;
-  }
-
-  .chart-days {
-    display: flex; align-items: flex-end;
-    height: 180px; gap: 2px;
-    padding: 10px 0 20px 0; margin: 10px 0;
-    border-bottom: 1px solid #333;
-    overflow-x: auto;
-  }
-  .chart-day-col {
-    flex: 1;
-    min-width: 8px;
-    display: flex; flex-direction: column;
-    justify-content: flex-end; align-items: center;
-    gap: 1px;
-    position: relative;
-  }
-  .chart-day-col .bar-in {
-    width: 100%;
-    background: #4caf50;
-    border-radius: 2px 2px 0 0;
-    min-height: 2px;
-  }
-  .chart-day-col .bar-out {
-    width: 100%;
-    background: #f44336;
-    border-radius: 0 0 2px 2px;
-    min-height: 2px;
-  }
-  .chart-day-col .day-num {
-    font-size: 9px; color: #666;
-    position: absolute; bottom: -16px;
-  }
-  .chart-legend {
-    display: flex; gap: 14px; justify-content: center;
-    font-size: 11px; color: #888; margin-top: 8px;
-  }
-  .chart-legend span::before {
-    content: ''; display: inline-block;
-    width: 10px; height: 10px; border-radius: 2px;
-    margin-right: 4px; vertical-align: middle;
-  }
+  .position-item .btns button { background: transparent; border: none; cursor: pointer; font-size: 14px; padding: 2px 4px; }
+  .chart-days { display: flex; align-items: flex-end; height: 180px; gap: 2px; padding: 10px 0 20px 0; margin: 10px 0; border-bottom: 1px solid #333; overflow-x: auto; }
+  .chart-day-col { flex: 1; min-width: 8px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 1px; position: relative; }
+  .chart-day-col .bar-in { width: 100%; background: #4caf50; border-radius: 2px 2px 0 0; min-height: 2px; }
+  .chart-day-col .bar-out { width: 100%; background: #f44336; border-radius: 0 0 2px 2px; min-height: 2px; }
+  .chart-day-col .day-num { font-size: 9px; color: #666; position: absolute; bottom: -16px; }
+  .chart-legend { display: flex; gap: 14px; justify-content: center; font-size: 11px; color: #888; margin-top: 8px; }
+  .chart-legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
   .chart-legend .green::before { background: #4caf50; }
   .chart-legend .red::before { background: #f44336; }
-
-  .pie-wrap {
-    display: flex; align-items: center; gap: 16px;
-    margin: 12px 0;
-  }
-  .pie {
-    width: 130px; height: 130px; border-radius: 50%;
-    flex-shrink: 0;
-    position: relative;
-  }
-  .pie::after {
-    content: ''; position: absolute;
-    inset: 28px; background: #1e1e1e;
-    border-radius: 50%;
-  }
-  .pie-legend {
-    flex: 1;
-    font-size: 12px;
-    min-width: 0;
-  }
-  .pie-legend-row {
-    display: flex; justify-content: space-between;
-    padding: 4px 0;
-    border-bottom: 1px solid #2a2a2a;
-    gap: 8px;
-  }
+  .pie-wrap { display: flex; align-items: center; gap: 16px; margin: 12px 0; }
+  .pie { width: 130px; height: 130px; border-radius: 50%; flex-shrink: 0; position: relative; }
+  .pie::after { content: ''; position: absolute; inset: 28px; background: #1e1e1e; border-radius: 50%; }
+  .pie-legend { flex: 1; font-size: 12px; min-width: 0; }
+  .pie-legend-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #2a2a2a; gap: 8px; }
   .pie-legend-row:last-child { border-bottom: none; }
-  .pie-legend-row > span:first-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .pie-legend-row .color-dot {
-    display: inline-block; width: 10px; height: 10px;
-    border-radius: 50%; margin-right: 6px;
-    vertical-align: middle;
-  }
-  .pie-legend-row .amount {
-    font-family: ui-monospace, monospace;
-    color: #fff; font-weight: 700;
-    white-space: nowrap;
-  }
-
-  .cal-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
-    margin: 10px 0;
-  }
-  .cal-head {
-    text-align: center; font-size: 11px;
-    color: #888; padding: 4px 0;
-    font-weight: 600;
-  }
-  .cal-day {
-    aspect-ratio: 1;
-    background: #121212;
-    border-radius: 6px;
-    padding: 4px;
-    display: flex; flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
-    font-size: 11px;
-    border: 1px solid transparent;
-    min-height: 42px;
-  }
+  .pie-legend-row > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pie-legend-row .color-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .pie-legend-row .amount { font-family: ui-monospace, monospace; color: #fff; font-weight: 700; white-space: nowrap; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin: 10px 0; }
+  .cal-head { text-align: center; font-size: 11px; color: #888; padding: 4px 0; font-weight: 600; }
+  .cal-day { aspect-ratio: 1; background: #121212; border-radius: 6px; padding: 4px; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; font-size: 11px; border: 1px solid transparent; min-height: 42px; }
   .cal-day.empty-day { visibility: hidden; }
   .cal-day .day-num { color: #888; font-weight: 600; font-size: 12px; }
-  .cal-day .day-amount {
-    font-size: 9px;
-    font-family: ui-monospace, monospace;
-    color: #fff;
-    text-align: right;
-    font-weight: 700;
-  }
+  .cal-day .day-amount { font-size: 9px; font-family: ui-monospace, monospace; color: #fff; text-align: right; font-weight: 700; }
   .cal-day.green { background: #1b3a1e; }
   .cal-day.green .day-amount { color: #66bb6a; }
   .cal-day.yellow { background: #3a341b; }
@@ -373,42 +139,17 @@
   .cal-day.red .day-amount { color: #ef5350; }
   .cal-day.today { border-color: #4fc3f7; }
   .cal-day:active { transform: scale(0.95); }
-
-  .debt-tabs {
-    display: flex; gap: 6px; margin-bottom: 12px;
-  }
-  .debt-tabs button {
-    flex: 1; padding: 10px; border: none; border-radius: 8px;
-    background: #2a2a2a; color: #fff; font-size: 13px;
-    font-weight: 600; cursor: pointer;
-  }
-  .debt-tabs button.active {
-    background: #4fc3f7; color: #000;
-  }
-  .debt-item {
-    background: #121212; border-radius: 10px;
-    padding: 12px; margin-bottom: 8px;
-  }
-  .debt-item .top {
-    display: flex; justify-content: space-between;
-    align-items: center; margin-bottom: 6px;
-  }
+  .debt-tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+  .debt-tabs button { flex: 1; padding: 10px; border: none; border-radius: 8px; background: #2a2a2a; color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .debt-tabs button.active { background: #4fc3f7; color: #000; }
+  .debt-item { background: #121212; border-radius: 10px; padding: 12px; margin-bottom: 8px; }
+  .debt-item .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
   .debt-item .name { font-weight: 700; font-size: 14px; }
-  .debt-item .sum {
-    font-family: ui-monospace, monospace;
-    font-weight: 700; font-size: 15px;
-  }
+  .debt-item .sum { font-family: ui-monospace, monospace; font-weight: 700; font-size: 15px; }
   .debt-item .sum.i-owe { color: #f44336; }
   .debt-item .sum.owe-me { color: #4caf50; }
-  .debt-item .bottom {
-    display: flex; justify-content: space-between;
-    align-items: center; font-size: 11px; color: #888;
-  }
-  .debt-item .btn-close-debt {
-    background: #4caf50; color: #fff; border: none;
-    padding: 6px 12px; border-radius: 6px;
-    font-size: 12px; font-weight: 700; cursor: pointer;
-  }
+  .debt-item .bottom { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #888; }
+  .debt-item .btn-close-debt { background: #4caf50; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; }
   .debt-item.closed { opacity: 0.5; }
   .debt-item.closed .btn-close-debt { display: none; }
 </style>
@@ -423,7 +164,6 @@
   <button id="debtsBtn">💳 Долги</button>
   <button id="settingsBtn">⚙️ Категории</button>
   <button id="exportBtn">💾 CSV</button>
-  <button id="undoBtn">↩️ Отменить</button>
 </div>
 
 <div class="month-nav">
@@ -447,7 +187,6 @@
   <div id="historyList"></div>
 </div>
 
-<!-- Модалка: Смена -->
 <div class="modal-bg" id="shiftModal">
   <div class="modal">
     <h3>📊 Смена</h3>
@@ -474,7 +213,6 @@
   </div>
 </div>
 
-<!-- Модалка: Чаевые -->
 <div class="modal-bg" id="tipModal">
   <div class="modal">
     <h3>💵 Чаевые</h3>
@@ -495,7 +233,6 @@
   </div>
 </div>
 
-<!-- Модалка: Расход -->
 <div class="modal-bg" id="expenseModal">
   <div class="modal">
     <h3>➖ Расход</h3>
@@ -522,7 +259,6 @@
   </div>
 </div>
 
-<!-- Модалка: Аванс -->
 <div class="modal-bg" id="advanceModal">
   <div class="modal">
     <h3>🏦 Аванс</h3>
@@ -543,7 +279,6 @@
   </div>
 </div>
 
-<!-- Модалка: Получил ЗП -->
 <div class="modal-bg" id="salaryModal">
   <div class="modal">
     <h3 id="salaryTitle">💼 Получил ЗП</h3>
@@ -559,7 +294,6 @@
   </div>
 </div>
 
-<!-- Модалка: Отчёт -->
 <div class="modal-bg" id="reportModal">
   <div class="modal">
     <h3>📊 Отчёт за месяц</h3>
@@ -570,7 +304,6 @@
   </div>
 </div>
 
-<!-- Модалка: Календарь -->
 <div class="modal-bg" id="calendarModal">
   <div class="modal">
     <h3 id="calendarTitle">📅 Календарь</h3>
@@ -586,7 +319,6 @@
   </div>
 </div>
 
-<!-- Модалка: Долги -->
 <div class="modal-bg" id="debtsModal">
   <div class="modal">
     <h3>💳 Долги</h3>
@@ -602,7 +334,6 @@
   </div>
 </div>
 
-<!-- Модалка: Добавить долг -->
 <div class="modal-bg" id="debtAddModal">
   <div class="modal">
     <h3>💳 Новый долг</h3>
@@ -628,7 +359,6 @@
   </div>
 </div>
 
-<!-- Модалка: Расчёт по позициям -->
 <div class="modal-bg" id="calcModal">
   <div class="modal">
     <h3>🧮 Расчёт ЗП</h3>
@@ -644,7 +374,6 @@
   </div>
 </div>
 
-<!-- Модалка: Настройка позиций -->
 <div class="modal-bg" id="positionsModal">
   <div class="modal">
     <h3>⚙️ Позиции и заработок</h3>
@@ -664,7 +393,6 @@
   </div>
 </div>
 
-<!-- Модалка: Категории -->
 <div class="modal-bg" id="settingsModal">
   <div class="modal">
     <h3>⚙️ Категории расходов</h3>
@@ -685,21 +413,11 @@ const CATEGORIES_KEY = 'koshel_categories_v1';
 const DEBTS_KEY = 'koshel_debts_v1';
 const POSITIONS_KEY = 'koshel_positions_v1';
 
-const MONTHS_RU = ['Январь','Февраль','Март','Апрель','Май','Июнь',
-                   'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-const MONTHS_SHORT = ['янв','фев','мар','апр','мая','июн',
-                      'июл','авг','сен','окт','ноя','дек'];
+const MONTHS_RU = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const MONTHS_SHORT = ['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'];
 
-const DEFAULT_CATEGORIES = [
-  '🍔 Еда', '🚗 Транспорт', '🏠 Жильё', '📱 Связь',
-  '💊 Здоровье', '👕 Одежда', '🎉 Развлечения', '📦 Прочее'
-];
-
-const PIE_COLORS = [
-  '#4caf50', '#2196f3', '#ff9800', '#9c27b0',
-  '#f44336', '#00bcd4', '#ffc107', '#795548',
-  '#e91e63', '#3f51b5'
-];
+const DEFAULT_CATEGORIES = ['🍔 Еда', '🚗 Транспорт', '🏠 Жильё', '📱 Связь', '💊 Здоровье', '👕 Одежда', '🎉 Развлечения', '📦 Прочее'];
+const PIE_COLORS = ['#4caf50', '#2196f3', '#ff9800', '#9c27b0', '#f44336', '#00bcd4', '#ffc107', '#795548', '#e91e63', '#3f51b5'];
 
 let state = loadState();
 let categories = loadCategories();
@@ -711,152 +429,81 @@ let currentDebtTab = 'i-owe';
 let calMonth = new Date();
 
 function loadState() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch(e){}
+  try { const raw = localStorage.getItem(STORAGE_KEY); if (raw) return JSON.parse(raw); } catch(e){}
   return { operations: [] };
 }
 function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-
 function loadCategories() {
-  try {
-    const raw = localStorage.getItem(CATEGORIES_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch(e){}
+  try { const raw = localStorage.getItem(CATEGORIES_KEY); if (raw) return JSON.parse(raw); } catch(e){}
   return [...DEFAULT_CATEGORIES];
 }
 function saveCategories() { localStorage.setItem(CATEGORIES_KEY, JSON.stringify(categories)); }
-
 function loadDebts() {
-  try {
-    const raw = localStorage.getItem(DEBTS_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch(e){}
+  try { const raw = localStorage.getItem(DEBTS_KEY); if (raw) return JSON.parse(raw); } catch(e){}
   return [];
 }
 function saveDebts() { localStorage.setItem(DEBTS_KEY, JSON.stringify(debts)); }
-
 function loadPositions() {
-  try {
-    const raw = localStorage.getItem(POSITIONS_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch(e){}
+  try { const raw = localStorage.getItem(POSITIONS_KEY); if (raw) return JSON.parse(raw); } catch(e){}
   return [];
 }
 function savePositions() { localStorage.setItem(POSITIONS_KEY, JSON.stringify(positions)); }
 
-function monthKey(date) {
-  const d = new Date(date);
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-}
-function monthLabel(date) {
-  const d = new Date(date);
-  return `${MONTHS_RU[d.getMonth()]} ${d.getFullYear()}`;
-}
-function todayISO() {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-function yesterdayISO() {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-function fmtMoney(n) {
-  const abs = Math.abs(n).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-  return (n < 0 ? '−' : '') + abs + ' ₽';
-}
-function fmtDate(iso) {
-  if (!iso) return '—';
-  const parts = iso.split('-');
-  return `${parts[2]}.${parts[1]}`;
-}
+function monthKey(date) { const d = new Date(date); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`; }
+function monthLabel(date) { const d = new Date(date); return `${MONTHS_RU[d.getMonth()]} ${d.getFullYear()}`; }
+function todayISO() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function yesterdayISO() { const d = new Date(); d.setDate(d.getDate() - 1); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function fmtMoney(n) { const abs = Math.abs(n).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); return (n < 0 ? '−' : '') + abs + ' ₽'; }
+function fmtDate(iso) { if (!iso) return '—'; const parts = iso.split('-'); return `${parts[2]}.${parts[1]}`; }
 
-function isMonthClosed(key) {
-  return state.operations.some(op => op.type === 'salary' && op.monthKey === key);
-}
+function isMonthClosed(key) { return state.operations.some(op => op.type === 'salary' && op.monthKey === key); }
 
 function getMonthSummary(key) {
   const ops = state.operations.filter(op => op.monthKey === key);
   const salary = ops.filter(o => o.type === 'shift').reduce((s, o) => s + o.salary, 0);
-  const tips = ops.filter(o => o.type === 'shift' || o.type === 'tip')
-    .reduce((s, o) => s + (o.tips || 0), 0);
+  const tips = ops.filter(o => o.type === 'shift' || o.type === 'tip').reduce((s, o) => s + (o.tips || 0), 0);
   const advance = ops.filter(o => o.type === 'advance').reduce((s, o) => s + o.amount, 0);
   const expenses = ops.filter(o => o.type === 'expense').reduce((s, o) => s + o.amount, 0);
   const salaryOp = ops.find(o => o.type === 'salary');
   const fact = salaryOp ? salaryOp.fact : null;
-  const < toReceive = salaryh - advance;
-  const2 savings = tips - expenses;
-  const> closed = isMonthClosed(key);
- ${ return { salary, tips, advances, expenses, fact, toReceive, savings, closed };
+  const toReceive = salary - advance;
+  const savings = tips - expenses;
+  const closed = isMonthClosed(key);
+  return { salary, tips, advance, expenses, fact, toReceive, savings, closed };
 }
 
 function openModal(id) { document.getElementById(id).classList.add('open'); }
 function closeModal(el) { el.closest('.modal-bg').classList.remove('open'); }
 
-// ===== ОТОБРАЖЕНИЕ =====
 function render() {
   const key = monthKey(viewMonth);
   const s = getMonthSummary(key);
-
   document.getElementById('monthTitle').textContent = monthLabel(viewMonth);
 
   let html = `
-   .closed ? '✅ Закрыт' : '📊 Сводка'}</h2>
-    <div class="summary-row">
-      <span>📊 ЗП накоплено:</span>
-      <b class="amount">${fmtMoney(s.salary)}</b>
-    </div>
-    <div class="summary-row">
-      <span>🏦 Аванс:</span>
-      <b class="amount">${fmtMoney(s.advance)}</b>
-    </div>
-    <div class="summary-row accent">
-      <span>💵 К получению:</span>
-      <b class="amount">${fmtMoney(s.toReceive)}</b>
-    </div>
+    <h2>${s.closed ? '✅ Закрыт' : '📊 Сводка'}</h2>
+    <div class="summary-row"><span>📊 ЗП накоплено:</span><b class="amount">${fmtMoney(s.salary)}</b></div>
+    <div class="summary-row"><span>🏦 Аванс:</span><b class="amount">${fmtMoney(s.advance)}</b></div>
+    <div class="summary-row accent"><span>💵 К получению:</span><b class="amount">${fmtMoney(s.toReceive)}</b></div>
     <div class="summary-divider"></div>
-    <div class="summary-row">
-      <span>💵 Чаевые:</span>
-      <b class="amount">${fmtMoney(s.tips)}</b>
-    </div>
-    <div class="summary-row">
-      <span>➖ Расходы:</span>
-      <b class="amount">${fmtMoney(s.expenses)}</b>
-    </div>
+    <div class="summary-row"><span>💵 Чаевые:</span><b class="amount">${fmtMoney(s.tips)}</b></div>
+    <div class="summary-row"><span>➖ Расходы:</span><b class="amount">${fmtMoney(s.expenses)}</b></div>
     <div class="summary-divider"></div>
   `;
-
   if (s.closed && s.fact !== null) {
     const diff = s.fact - s.toReceive;
     html += `
-      <div class="summary-row">
-        <span>💼 Фактически ЗП:</span>
-        <b class="amount">${fmtMoney(s.fact)}</b>
-      </div>
-      <div class="summary-row ${diff >= 0 ? 'positive' : 'negative'}">
-        <span>📉 Разница ЗП:</span>
-        <b class="amount">${fmtMoney(diff)}</b>
-      </div>
+      <div class="summary-row"><span>💼 Фактически ЗП:</span><b class="amount">${fmtMoney(s.fact)}</b></div>
+      <div class="summary-row ${diff >= 0 ? 'positive' : 'negative'}"><span>📉 Разница ЗП:</span><b class="amount">${fmtMoney(diff)}</b></div>
       <div class="summary-divider"></div>
     `;
   }
-
-  html += `
-    <div class="big-amount ${s.savings >= 0 ? 'positive' : 'negative'}">
-      ${s.savings >= 0 ? '💰 Экономия: ' : '💸 Перерасход: '}
-      ${fmtMoney(s.savings)}
-    </div>
-  `;
-
+  html += `<div class="big-amount ${s.savings >= 0 ? 'positive' : 'negative'}">${s.savings >= 0 ? '💰 Экономия: ' : '💸 Перерасход: '}${fmtMoney(s.savings)}</div>`;
   document.getElementById('summary').innerHTML = html;
 
-  const ops = state.operations
-    .filter(op => op.monthKey === key)
-    .sort((a, b) => b.timestamp - a.timestamp);
-
+  const ops = state.operations.filter(op => op.monthKey === key).sort((a, b) => b.timestamp - a.timestamp);
   const histEl = document.getElementById('historyList');
+
   if (ops.length === 0) {
     histEl.innerHTML = '<div class="empty">Нет операций за этот месяц</div>';
   } else {
@@ -874,10 +521,36 @@ function render() {
             <span>${label}</span>
             <span class="date"> · ${fmtDate(op.date)}</span>
           </div>
-          <div class="amount ${cls}">${amount}</div>
+          <div style="display:flex;align-items:center;">
+            <span class="amount ${cls}">${amount}</span>
+            <button class="btn-del-history" data-del-op="${op.id}" title="Удалить">🗑️</button>
+          </div>
         </div>
       `;
     }).join('');
+
+    histEl.querySelectorAll('[data-del-op]').forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const id = btn.dataset.delOp;
+        const op = state.operations.find(o => o.id === id);
+        if (!op) return;
+
+        let lbl = '';
+        if (op.type === 'shift') lbl = `📊 Смена — ${fmtMoney(op.salary + (op.tips || 0))}`;
+        else if (op.type === 'tip') lbl = `💵 Чаевые — ${fmtMoney(op.tips)}`;
+        else if (op.type === 'expense') lbl = `➖ ${op.category} — ${fmtMoney(op.amount)}`;
+        else if (op.type === 'advance') lbl = `🏦 Аванс — ${fmtMoney(op.amount)}`;
+        else if (op.type === 'salary') lbl = `💼 ЗП — ${fmtMoney(op.fact)}`;
+
+        if (!confirm(`Удалить операцию?\n\n${lbl}\nДата: ${fmtDate(op.date)}`)) return;
+
+        state.operations = state.operations.filter(o => o.id !== id);
+        saveState();
+        if (navigator.vibrate) navigator.vibrate(30);
+        render();
+      };
+    });
   }
 
   const salaryBtn = document.getElementById('salaryBtn');
@@ -901,15 +574,9 @@ function render() {
   }
 }
 
-// ===== ЗАКРЫТИЕ МОДАЛОК =====
-document.querySelectorAll('[data-close]').forEach(btn => {
-  btn.onclick = (e) => closeModal(e.target);
-});
-document.querySelectorAll('.modal-bg').forEach(bg => {
-  bg.onclick = (e) => { if (e.target === bg) bg.classList.remove('open'); };
-});
+document.querySelectorAll('[data-close]').forEach(btn => { btn.onclick = (e) => closeModal(e.target); });
+document.querySelectorAll('.modal-bg').forEach(bg => { bg.onclick = (e) => { if (e.target === bg) bg.classList.remove('open'); }; });
 
-// ===== БЫСТРЫЕ КНОПКИ ДАТЫ =====
 document.querySelectorAll('.date-quick button').forEach(btn => {
   btn.onclick = (e) => {
     e.preventDefault();
@@ -919,41 +586,6 @@ document.querySelectorAll('.date-quick button').forEach(btn => {
   };
 });
 
-// ===== ОТМЕНА ПОСЛЕДНЕГО ДЕЙСТВИЯ =====
-document.getElementById('undoBtn').onclick = () => {
-  const key = monthKey(viewMonth);
-  const ops = state.operations
-    .filter(op => op.monthKey === key)
-    .sort((a, b) => b.timestamp - a.timestamp);
-
-  if (ops.length === 0) {
-    return alert('Нет операций за этот месяц для отмены');
-  }
-
-  const last = ops[0];
-  let label = '';
-  if (last.type === 'shift') {
-    label = `📊 Смена — ${fmtMoney(last.salary + (last.tips || 0))}`;
-  } else if (last.type === 'tip') {
-    label = `💵 Чаевые — ${fmtMoney(last.tips)}`;
-  } else if (last.type === 'expense') {
-    label = `➖ Расход ${last.category} — ${fmtMoney(last.amount)}`;
-  } else if (last.type === 'advance') {
-    label = `🏦 Аванс — ${fmtMoney(last.amount)}`;
-  } else if (last.type === 'salary') {
-    label = `💼 ЗП получена — ${fmtMoney(last.fact)}`;
-  }
-
-  const msg = `Отменить последнее действие?\n\n${label}\nДата: ${fmtDate(last.date)}`;
-  if (!confirm(msg)) return;
-
-  state.operations = state.operations.filter(op => op.id !== last.id);
-  saveState();
-  if (navigator.vibrate) navigator.vibrate(30);
-  render();
-};
-
-// ===== СМЕНА =====
 document.getElementById('shiftBtn').onclick = () => {
   document.getElementById('shiftDate').value = todayISO();
   document.getElementById('shiftSalary').value = '';
@@ -967,20 +599,13 @@ document.getElementById('saveShift').onclick = () => {
   const tips = parseInt(document.getElementById('shiftTips').value) || 0;
   if (!date) return alert('Укажи дату');
   if (salary === 0 && tips === 0) return alert('Введи сумму');
-
   const calcEl = document.getElementById('calcModal');
   const details = calcEl.dataset.details;
   let positionsDetail = null;
-  if (details) {
-    try { positionsDetail = JSON.parse(details); } catch(e){}
-  }
-
+  if (details) { try { positionsDetail = JSON.parse(details); } catch(e){} }
   state.operations.push({
     id: Date.now() + Math.random().toString(36).slice(2, 6),
-    type: 'shift', date, monthKey: monthKey(date),
-    salary, tips,
-    positionsDetail,
-    timestamp: Date.now(),
+    type: 'shift', date, monthKey: monthKey(date), salary, tips, positionsDetail, timestamp: Date.now(),
   });
   saveState();
   calcEl.dataset.details = '';
@@ -988,7 +613,6 @@ document.getElementById('saveShift').onclick = () => {
   render();
 };
 
-// ===== ЧАЕВЫЕ =====
 document.getElementById('tipBtn').onclick = () => {
   document.getElementById('tipDate').value = todayISO();
   document.getElementById('tipAmount').value = '';
@@ -1001,15 +625,13 @@ document.getElementById('saveTip').onclick = () => {
   if (tips === 0) return alert('Введи сумму');
   state.operations.push({
     id: Date.now() + Math.random().toString(36).slice(2, 6),
-    type: 'tip', date, monthKey: monthKey(date),
-    tips, timestamp: Date.now(),
+    type: 'tip', date, monthKey: monthKey(date), tips, timestamp: Date.now(),
   });
   saveState();
   closeModal(document.getElementById('saveTip'));
   render();
 };
 
-// ===== РАСХОД =====
 document.getElementById('expenseBtn').onclick = () => {
   document.getElementById('expenseDate').value = todayISO();
   document.getElementById('expenseAmount').value = '';
@@ -1027,15 +649,13 @@ document.getElementById('saveExpense').onclick = () => {
   if (amount === 0) return alert('Введи сумму');
   state.operations.push({
     id: Date.now() + Math.random().toString(36).slice(2, 6),
-    type: 'expense', date, monthKey: monthKey(date),
-    amount, category, note, timestamp: Date.now(),
+    type: 'expense', date, monthKey: monthKey(date), amount, category, note, timestamp: Date.now(),
   });
   saveState();
   closeModal(document.getElementById('saveExpense'));
   render();
 };
 
-// ===== АВАНС =====
 document.getElementById('advanceBtn').onclick = () => {
   document.getElementById('advanceDate').value = todayISO();
   document.getElementById('advanceAmount').value = '';
@@ -1048,15 +668,13 @@ document.getElementById('saveAdvance').onclick = () => {
   if (amount === 0) return alert('Введи сумму');
   state.operations.push({
     id: Date.now() + Math.random().toString(36).slice(2, 6),
-    type: 'advance', date, monthKey: monthKey(date),
-    amount, timestamp: Date.now(),
+    type: 'advance', date, monthKey: monthKey(date), amount, timestamp: Date.now(),
   });
   saveState();
   closeModal(document.getElementById('saveAdvance'));
   render();
 };
 
-// ===== ЗП =====
 document.getElementById('salaryBtn').onclick = () => {
   const prev = new Date(viewMonth);
   prev.setMonth(prev.getMonth() - 1);
@@ -1089,11 +707,7 @@ document.getElementById('salaryFact').addEventListener('input', () => {
   const diffEl = document.getElementById('salaryDiff');
   diffEl.style.display = 'block';
   diffEl.className = 'profit-preview';
-  diffEl.innerHTML = `
-    <div class="row diff ${diff >= 0 ? 'positive' : 'negative'}">
-      <span>Разница:</span><b>${fmtMoney(diff)}</b>
-    </div>
-  `;
+  diffEl.innerHTML = `<div class="row diff ${diff >= 0 ? 'positive' : 'negative'}"><span>Разница:</span><b>${fmtMoney(diff)}</b></div>`;
 });
 document.getElementById('saveSalary').onclick = () => {
   const fact = parseInt(document.getElementById('salaryFact').value) || 0;
@@ -1101,15 +715,13 @@ document.getElementById('saveSalary').onclick = () => {
   if (fact === 0 && !confirm('Получил 0 ₽? Закрыть месяц?')) return;
   state.operations.push({
     id: Date.now() + Math.random().toString(36).slice(2, 6),
-    type: 'salary', date: todayISO(), monthKey: closeKey,
-    fact, timestamp: Date.now(),
+    type: 'salary', date: todayISO(), monthKey: closeKey, fact, timestamp: Date.now(),
   });
   saveState();
   closeModal(document.getElementById('saveSalary'));
   render();
 };
 
-// ===== КАЛЬКУЛЯТОР ЗП =====
 document.getElementById('calcPositionsBtn').onclick = () => {
   if (positions.length === 0) {
     if (confirm('Ещё нет позиций. Добавить первую сейчас?')) {
@@ -1138,9 +750,7 @@ function renderCalcList() {
           <div class="name">${p.name}</div>
           <div class="meta">${p.earn} ₽ за шт</div>
         </div>
-        <input type="number" min="0" inputmode="numeric"
-               data-calc-id="${p.id}" value="${qty || ''}"
-               placeholder="0">
+        <input type="number" min="0" inputmode="numeric" data-calc-id="${p.id}" value="${qty || ''}" placeholder="0">
         <div class="result">${result ? result + ' ₽' : '—'}</div>
       </div>
     `;
@@ -1157,7 +767,6 @@ function renderCalcList() {
       updateCalcTotal();
     };
   });
-
   updateCalcTotal();
 }
 
@@ -1183,10 +792,7 @@ document.getElementById('applyCalc').onclick = () => {
     total += sum;
     details.push({ name: p.name, qty, earn: p.earn, sum });
   }
-  if (total === 0) {
-    alert('Введи количество хотя бы в одной позиции');
-    return;
-  }
+  if (total === 0) { alert('Введи количество хотя бы в одной позиции'); return; }
   document.getElementById('shiftSalary').value = Math.round(total);
   document.getElementById('calcModal').dataset.details = JSON.stringify(details);
   closeModal(document.getElementById('applyCalc'));
@@ -1205,17 +811,8 @@ function renderPositionsList() {
   }
   el.innerHTML = positions.map(p => `
     <div class="position-item">
-      <div class="top">
-        <span class="name">${p.name}</span>
-        <span class="percent">${p.earn} ₽/шт</span>
-      </div>
-      <div class="bottom">
-        <span></span>
-        <div class="btns">
-          <button data-edit-pos="${p.id}">✏️</button>
-          <button data-del-pos="${p.id}">🗑️</button>
-        </div>
-      </div>
+      <div class="top"><span class="name">${p.name}</span><span class="percent">${p.earn} ₽/шт</span></div>
+      <div class="bottom"><span></span><div class="btns"><button data-edit-pos="${p.id}">✏️</button><button data-del-pos="${p.id}">🗑️</button></div></div>
     </div>
   `).join('');
 
@@ -1253,17 +850,13 @@ document.getElementById('addPositionBtn').onclick = () => {
   const earn = parseFloat(document.getElementById('posEarn').value) || 0;
   if (!name) return alert('Введи название');
   if (earn <= 0) return alert('Введи заработок');
-  positions.push({
-    id: Date.now() + Math.random().toString(36).slice(2, 6),
-    name, earn,
-  });
+  positions.push({ id: Date.now() + Math.random().toString(36).slice(2, 6), name, earn });
   savePositions();
   document.getElementById('posName').value = '';
   document.getElementById('posEarn').value = '';
   renderPositionsList();
 };
 
-// ===== ОТЧЁТ =====
 document.getElementById('reportBtn').onclick = () => {
   const key = monthKey(viewMonth);
   const ops = state.operations.filter(o => o.monthKey === key);
@@ -1299,12 +892,7 @@ document.getElementById('reportBtn').onclick = () => {
     `;
   }
   chartHtml += '</div>';
-  chartHtml += `
-    <div class="chart-legend">
-      <span class="green">Доход</span>
-      <span class="red">Расход</span>
-    </div>
-  `;
+  chartHtml += '<div class="chart-legend"><span class="green">Доход</span><span class="red">Расход</span></div>';
 
   const byCategory = {};
   ops.filter(o => o.type === 'expense').forEach(o => {
@@ -1330,15 +918,7 @@ document.getElementById('reportBtn').onclick = () => {
         <div class="pie-legend">
           ${catEntries.map(([cat, val], i) => {
             const pct = Math.round((val / totalExp) * 100);
-            return `
-              <div class="pie-legend-row">
-                <span>
-                  <span class="color-dot" style="background:${PIE_COLORS[i % PIE_COLORS.length]};"></span>
-                  ${cat}
-                </span>
-                <span class="amount">${fmtMoney(val)} <span style="color:#888;font-size:11px;">${pct}%</span></span>
-              </div>
-            `;
+            return `<div class="pie-legend-row"><span><span class="color-dot" style="background:${PIE_COLORS[i % PIE_COLORS.length]};"></span>${cat}</span><span class="amount">${fmtMoney(val)} <span style="color:#888;font-size:11px;">${pct}%</span></span></div>`;
           }).join('')}
         </div>
       </div>
@@ -1354,20 +934,17 @@ document.getElementById('reportBtn').onclick = () => {
       <div class="row"><span>Чаевые:</span><b>${fmtMoney(s.tips)}</b></div>
       <div class="row"><span>Расходы:</span><b>${fmtMoney(s.expenses)}</b></div>
       <div class="row diff ${s.savings >= 0 ? 'positive' : 'negative'}">
-        <span>${s.savings >= 0 ? '💰 Экономия' : '💸 Перерасход'}:</span>
-        <b>${fmtMoney(s.savings)}</b>
+        <span>${s.savings >= 0 ? '💰 Экономия' : '💸 Перерасход'}:</span><b>${fmtMoney(s.savings)}</b>
       </div>
     </div>
     <h4 style="margin:16px 0 8px;font-size:13px;color:#888;">📊 По дням месяца</h4>
     ${chartHtml}
     ${pieHtml}
   `;
-
   document.getElementById('reportContent').innerHTML = html;
   openModal('reportModal');
 };
 
-// ===== КАЛЕНДАРЬ =====
 document.getElementById('calendarBtn').onclick = () => {
   calMonth = new Date(viewMonth);
   renderCalendar();
@@ -1382,7 +959,6 @@ function renderCalendar() {
 
   const key = monthKey(calMonth);
   const ops = state.operations.filter(o => o.monthKey === key);
-
   const dailyIn = {}, dailyOut = {};
   ops.forEach(o => {
     const day = parseInt(o.date.split('-')[2]);
@@ -1396,18 +972,13 @@ function renderCalendar() {
   const firstDay = new Date(year, monthNum, 1).getDay();
   const daysInMonth = new Date(year, monthNum + 1, 0).getDate();
   const offset = (firstDay === 0 ? 6 : firstDay - 1);
-
   const today = new Date();
   const isThisMonth = today.getFullYear() === year && today.getMonth() === monthNum;
   const todayDay = today.getDate();
 
   let html = '';
-  ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'].forEach(d => {
-    html += `<div class="cal-head">${d}</div>`;
-  });
-  for (let i = 0; i < offset; i++) {
-    html += `<div class="cal-day empty-day"></div>`;
-  }
+  ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'].forEach(d => { html += `<div class="cal-head">${d}</div>`; });
+  for (let i = 0; i < offset; i++) { html += `<div class="cal-day empty-day"></div>`; }
   for (let d = 1; d <= daysInMonth; d++) {
     const inc = dailyIn[d] || 0;
     const out = dailyOut[d] || 0;
@@ -1417,16 +988,9 @@ function renderCalendar() {
     else if (out > 0) cls = 'red';
     const isToday = isThisMonth && d === todayDay;
     const amountText = inc > 0 ? '+' + Math.round(inc) : (out > 0 ? '−' + Math.round(out) : '');
-    html += `
-      <div class="cal-day ${cls} ${isToday ? 'today' : ''}" data-day="${d}">
-        <div class="day-num">${d}</div>
-        <div class="day-amount">${amountText}</div>
-      </div>
-    `;
+    html += `<div class="cal-day ${cls} ${isToday ? 'today' : ''}" data-day="${d}"><div class="day-num">${d}</div><div class="day-amount">${amountText}</div></div>`;
   }
-
   document.getElementById('calendarGrid').innerHTML = html;
-
   document.querySelectorAll('#calendarGrid .cal-day:not(.empty-day)').forEach(el => {
     el.onclick = () => showDayDetail(parseInt(el.dataset.day));
   });
@@ -1435,14 +999,10 @@ function renderCalendar() {
 function showDayDetail(day) {
   const dateStr = `${calMonth.getFullYear()}-${String(calMonth.getMonth()+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
   const ops = state.operations.filter(o => o.date === dateStr);
-
   if (ops.length === 0) {
-    document.getElementById('calendarDayDetail').innerHTML = `
-      <div class="empty">Нет операций за ${fmtDate(dateStr)}</div>
-    `;
+    document.getElementById('calendarDayDetail').innerHTML = `<div class="empty">Нет операций за ${fmtDate(dateStr)}</div>`;
     return;
   }
-
   const html = ops.map(op => {
     let icon = '•', label = '', amount = '', cls = 'neutral';
     if (op.type === 'shift') { icon = '📊'; label = 'Смена'; amount = fmtMoney(op.salary + (op.tips||0)); cls = 'income'; }
@@ -1450,26 +1010,12 @@ function showDayDetail(day) {
     else if (op.type === 'expense') { icon = '➖'; label = op.category; amount = '−' + fmtMoney(op.amount); cls = 'expense'; }
     else if (op.type === 'advance') { icon = '🏦'; label = 'Аванс'; amount = fmtMoney(op.amount); cls = 'neutral'; }
     else if (op.type === 'salary') { icon = '💼'; label = 'ЗП факт'; amount = fmtMoney(op.fact); cls = 'neutral'; }
-    return `
-      <div class="history-item">
-        <div><span class="type-icon">${icon}</span>${label}</div>
-        <div class="amount ${cls}">${amount}</div>
-      </div>
-    `;
+    return `<div class="history-item"><div><span class="type-icon">${icon}</span>${label}</div><div class="amount ${cls}">${amount}</div></div>`;
   }).join('');
-
-  document.getElementById('calendarDayDetail').innerHTML = `
-    <h4 style="font-size:13px;color:#888;margin:0 0 6px;">${fmtDate(dateStr)}</h4>
-    ${html}
-  `;
+  document.getElementById('calendarDayDetail').innerHTML = `<h4 style="font-size:13px;color:#888;margin:0 0 6px;">${fmtDate(dateStr)}</h4>${html}`;
 }
 
-// ===== ДОЛГИ =====
-document.getElementById('debtsBtn').onclick = () => {
-  renderDebts();
-  openModal('debtsModal');
-};
-
+document.getElementById('debtsBtn').onclick = () => { renderDebts(); openModal('debtsModal'); };
 document.getElementById('tabIOwe').onclick = () => {
   currentDebtTab = 'i-owe';
   document.getElementById('tabIOwe').classList.add('active');
@@ -1487,20 +1033,16 @@ function renderDebts() {
   const filtered = debts.filter(d => d.type === currentDebtTab);
   const active = filtered.filter(d => !d.closed);
   const closed = filtered.filter(d => d.closed);
-
   const el = document.getElementById('debtsList');
   if (filtered.length === 0) {
     el.innerHTML = '<div class="empty">Нет долгов</div>';
     return;
   }
-
   const htmlActive = active.map(d => debtHtml(d)).join('');
   const htmlClosed = closed.length
     ? `<h4 style="font-size:12px;color:#666;margin:14px 0 8px;text-transform:uppercase;">Закрытые</h4>${closed.map(d => debtHtml(d)).join('')}`
     : '';
-
   el.innerHTML = htmlActive + htmlClosed;
-
   el.querySelectorAll('[data-close-debt]').forEach(btn => {
     btn.onclick = () => {
       const id = btn.dataset.closeDebt;
@@ -1519,10 +1061,7 @@ function debtHtml(d) {
   const sumClass = d.type === 'i-owe' ? 'i-owe' : 'owe-me';
   return `
     <div class="debt-item ${d.closed ? 'closed' : ''}">
-      <div class="top">
-        <span class="name">${d.name}</span>
-        <span class="sum ${sumClass}">${fmtMoney(d.amount)}</span>
-      </div>
+      <div class="top"><span class="name">${d.name}</span><span class="sum ${sumClass}">${fmtMoney(d.amount)}</span></div>
       <div class="bottom">
         <span>${d.note ? d.note + ' · ' : ''}${fmtDate(d.date)}</span>
         ${!d.closed ? `<button class="btn-close-debt" data-close-debt="${d.id}">Вернул</button>` : '<span>✅ закрыт</span>'}
@@ -1545,23 +1084,13 @@ document.getElementById('saveDebt').onclick = () => {
   const note = document.getElementById('debtNote').value.trim();
   if (!name) return alert('Введи имя');
   if (amount === 0) return alert('Введи сумму');
-  debts.push({
-    id: Date.now() + Math.random().toString(36).slice(2, 6),
-    type, name, amount, note,
-    date: todayISO(),
-    closed: false,
-    timestamp: Date.now(),
-  });
+  debts.push({ id: Date.now() + Math.random().toString(36).slice(2, 6), type, name, amount, note, date: todayISO(), closed: false, timestamp: Date.now() });
   saveDebts();
   closeModal(document.getElementById('saveDebt'));
   renderDebts();
 };
 
-// ===== КАТЕГОРИИ =====
-document.getElementById('settingsBtn').onclick = () => {
-  renderCategories();
-  openModal('settingsModal');
-};
+document.getElementById('settingsBtn').onclick = () => { renderCategories(); openModal('settingsModal'); };
 function renderCategories() {
   const el = document.getElementById('categoriesList');
   if (categories.length === 0) {
@@ -1594,29 +1123,20 @@ document.getElementById('addCategory').onclick = () => {
   renderCategories();
 };
 
-// ===== CSV =====
 document.getElementById('exportBtn').onclick = () => {
   if (state.operations.length === 0) return alert('Нет данных');
-
   const incomeRows = [['Дата','Тип','Сумма','Чаевые','Месяц']];
-  state.operations
-    .filter(o => ['shift','tip','advance','salary'].includes(o.type))
-    .sort((a,b) => a.timestamp - b.timestamp)
-    .forEach(o => {
-      if (o.type === 'shift') incomeRows.push([o.date, 'Смена', o.salary, o.tips, o.monthKey]);
-      else if (o.type === 'tip') incomeRows.push([o.date, 'Чаевые', o.tips, o.tips, o.monthKey]);
-      else if (o.type === 'advance') incomeRows.push([o.date, 'Аванс', o.amount, 0, o.monthKey]);
-      else if (o.type === 'salary') incomeRows.push([o.date, 'ЗП факт', o.fact, 0, o.monthKey]);
-    });
+  state.operations.filter(o => ['shift','tip','advance','salary'].includes(o.type)).sort((a,b) => a.timestamp - b.timestamp).forEach(o => {
+    if (o.type === 'shift') incomeRows.push([o.date, 'Смена', o.salary, o.tips, o.monthKey]);
+    else if (o.type === 'tip') incomeRows.push([o.date, 'Чаевые', o.tips, o.tips, o.monthKey]);
+    else if (o.type === 'advance') incomeRows.push([o.date, 'Аванс', o.amount, 0, o.monthKey]);
+    else if (o.type === 'salary') incomeRows.push([o.date, 'ЗП факт', o.fact, 0, o.monthKey]);
+  });
   downloadCSV(incomeRows, `доходы_${todayISO()}.csv`);
-
   const expenseRows = [['Дата','Сумма','Категория','Заметка','Месяц']];
-  state.operations
-    .filter(o => o.type === 'expense')
-    .sort((a,b) => a.timestamp - b.timestamp)
-    .forEach(o => {
-      expenseRows.push([o.date, o.amount, o.category, o.note || '', o.monthKey]);
-    });
+  state.operations.filter(o => o.type === 'expense').sort((a,b) => a.timestamp - b.timestamp).forEach(o => {
+    expenseRows.push([o.date, o.amount, o.category, o.note || '', o.monthKey]);
+  });
   setTimeout(() => downloadCSV(expenseRows, `расходы_${todayISO()}.csv`), 300);
 };
 
@@ -1630,19 +1150,9 @@ function downloadCSV(rows, filename) {
   URL.revokeObjectURL(url);
 }
 
-// ===== НАВИГАЦИЯ МЕСЯЦЕВ =====
-document.getElementById('prevMonth').onclick = () => {
-  viewMonth = new Date(viewMonth);
-  viewMonth.setMonth(viewMonth.getMonth() - 1);
-  render();
-};
-document.getElementById('nextMonth').onclick = () => {
-  viewMonth = new Date(viewMonth);
-  viewMonth.setMonth(viewMonth.getMonth() + 1);
-  render();
-};
+document.getElementById('prevMonth').onclick = () => { viewMonth = new Date(viewMonth); viewMonth.setMonth(viewMonth.getMonth() - 1); render(); };
+document.getElementById('nextMonth').onclick = () => { viewMonth = new Date(viewMonth); viewMonth.setMonth(viewMonth.getMonth() + 1); render(); };
 
-// ===== PWA =====
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
